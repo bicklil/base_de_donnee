@@ -2,7 +2,12 @@ Fonctionnalités :
 
 affichage du nombre total de messages
 affichage du nombre total d’utilisateurs
-nombre de connexions/ par tranche horaires ou dates
+affichage de tous les messages d'un utilisateur
+affichage de tous les messages d'un sujet
+nombre de connexions tranche horaire
+nombre de connexions par date
+nombre de messages postés par tranche horaire
+nombre de messages postés par dates
 nombre de candidats possible pour un recruteur
 nombre de comptes par villes
 tranche d’age des utilisateurs
@@ -10,26 +15,29 @@ tranche d’age des utilisateurs
 
 trigger :
 
-modification – moyenne des utilisateurs
-modification – stat connexion / user last connexion
-insertion – stat nb message / messages
-insertion/suppression – user nb messages / messages
-insertion/modification – user rang/ messages
+insertion/modification/suppression d'un message – modification de la moyennequalitémsg de l'utilisateur concerné
+modification à la connexion d'un utilisateur – modification de la stat de connexions par heure et de la date de dernière connexion de l'utilisateur
+insertion d'un message – modification de la stat de messages par heure
+insertion/suppression d'un message – modification du nombre de message
+insertion/modification d'un message – check s'il faut changer de rang
+
 
 
 vue :
 
-pour le recruteur
+une vue permettant d'accèder au profil les plus favorables pour un recruteur
+une vue permettant d'avoir un pack de n messages consécutifs temporellement dans un sujet
+une vue permettant d'avoir un pack de n sujet consécutifs temporellement dans une catégorie
 pour les statistiques
 
 
 rôle :
 
-admin :
-	un admin peut lire et modifier tout les messages postés
-	un admin peut accéder à toutes les données et  les modifier de tout les utilisateurs
-	un admin peut …
-	un admin a accès au fonctions suivantes :
+admininistrateur :
+	un administrateur peut lire et modifier tout les messages postés
+	un administrateur peut accéder à toutes les données et  les modifier de tout les utilisateurs
+	un administrateur peut …
+	un administrateur a accès au fonctions suivantes :
 		-
 
 modérateur:
