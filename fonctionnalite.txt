@@ -4,6 +4,10 @@ affichage du nombre total de messages
 affichage du nombre total d’utilisateurs
 affichage de tous les messages d'un utilisateur
 affichage de tous les messages d'un sujet
+affichage de tous les messages privés d'une personne
+affichage de tous les messages privés provenant d'une certaine personne
+affichage des proportions des systèmes d'exploitations utilisés
+affichage des proportions des navigateurs internet utilisés
 nombre de connexions tranche horaire
 nombre de connexions par date
 nombre de messages postés par tranche horaire
@@ -20,7 +24,9 @@ modification à la connexion d'un utilisateur – modification de la stat de con
 insertion d'un message – modification de la stat de messages par heure
 insertion/suppression d'un message – modification du nombre de message
 insertion/modification d'un message – check s'il faut changer de rang
-
+insertion d'une demande de recrutement - vérification de la date limite de dépot
+insertion d'une offre de recrutement - vérification dateButoire > DateAnnonce
+modification de modérateur - vérification qu'il n'y a qu'un seul modérateur par section
 
 
 vue :
@@ -28,7 +34,6 @@ vue :
 une vue permettant d'accèder au profil les plus favorables pour un recruteur
 une vue permettant d'avoir un pack de n messages consécutifs temporellement dans un sujet
 une vue permettant d'avoir un pack de n sujet consécutifs temporellement dans une catégorie
-pour les statistiques
 
 
 rôle :
@@ -36,37 +41,23 @@ rôle :
 admininistrateur :
 	un administrateur peut lire et modifier tout les messages postés
 	un administrateur peut accéder à toutes les données et  les modifier de tout les utilisateurs
-	un administrateur peut …
-	un administrateur a accès au fonctions suivantes :
-		-
+	un administrateur peut accéder à toutes les statistiques
 
 modérateur:
 	un modérateur peut lire et modifier tout les messages postés sur la section sous sa responsabilité
   un modérateur peut lire tout les messages du forum
 	un modérateur peut accéder au données public des utilisateurs
-	un modérateur peut …
-	un modérateur a accès au fonctions suivantes :
-    -
 
 recruteur :
   un recruteur peut lire et modifier tout les messages postés par lui même
   un recruteur peut lire tout les messages du forum
   un recruteur peut accéder au données public des utilisateurs
-  un recruteur peut …
-  un recruteur a accès au fonctions suivantes :
-    -
 
 utilisateur lambda inscrit :
   un utilisateur lambda inscrit peut lire et modifier tout les messages postés par lui même
   un utilisateur lambda inscrit peut lire tout les messages du forum
   un utilisateur lambda inscrit peut accéder au données public des utilisateurs
-  un utilisateur lambda inscrit peut …
-  un utilisateur lambda inscrit a accès au fonctions suivantes :
-    -
 
 utilisateur lambda non inscrit :
   un utilisateur lambda non inscrit ne peut pas lire ou modifier aucun messages
   un utilisateur lambda non inscrit ne peut accéder a aucune information sur les utilisateurs
-  un utilisateur lambda non inscrit peut …
-  un utilisateur lambda non inscrit a accès au fonctions suivantes :
-    -
