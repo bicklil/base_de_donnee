@@ -1,0 +1,13 @@
+
+Bonjour,
+
+Il est indispensable de mettre les associations dans le modèle entités "associations", sinon ce n'est pas un MEA tout simplement.
+En ce qui concerne le statut de l'entité "utilisateur", vous dites que selon vous cette représentation est meilleure... Quels sont vos arguments ? Pour la modélisation je vous renvois d'abord à votre cours qui explique pas à pas comment dériver le schéma relationnel à partir du MEA.
+Je note aussi qu'un utilisateur est identifié par son pseudo et que l'adresse mail est un simple attribut... Cela veut dire que l'on peut créer plusieurs comptes avec une même adresse mail. Ne pensez-vous pas que cela pose un problème ?
+Absence d'explications sur les attributs du modèle relationnel.
+Absence de la matrice des DF qui me garantit une réflexion solide derrière.
+
+C'est un peu léger et inquiétant si je pars du principe que vous êtes normalement un des meilleurs groupes.
+Bon courage.
+
+JE n'ai pas vue de vues.
