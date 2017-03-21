@@ -3,6 +3,7 @@ Fonctionnalités :
 affichage du nombre total de messages
 affichage du nombre total d’utilisateurs
 affichage de tous les messages d'un utilisateur
+affichage de tous les messages d'un utilisateur dans une tranche horaire
 affichage de tous les messages d'un sujet
 nombre de connexions tranche horaire
 nombre de connexions par date
@@ -11,6 +12,14 @@ nombre de messages postés par dates
 nombre de candidats possible pour un recruteur
 nombre de comptes par villes
 tranche d’age des utilisateurs
+liste de message contenant un motif
+recherche de profil en fonction du niveau et type de programmation
+recherche d'un profil en fonction d'un pseudo
+nombre de messages par catégorie
+nombre de sujet par catégorie
+affichage toutes les annonces en fonction du langage/type contrat
+
+
 
 
 trigger :
@@ -20,15 +29,14 @@ modification à la connexion d'un utilisateur – modification de la stat de con
 insertion d'un message – modification de la stat de messages par heure
 insertion/suppression d'un message – modification du nombre de message
 insertion/modification d'un message – check s'il faut changer de rang
-
+insertion d'un utilisateur - vérification des informations (unicité du pseudo, mail valide)
 
 
 vue :
 
 une vue permettant d'accèder au profil les plus favorables pour un recruteur
 une vue permettant d'avoir un pack de n messages consécutifs temporellement dans un sujet
-une vue permettant d'avoir un pack de n sujet consécutifs temporellement dans une catégorie
-pour les statistiques
+une vue permettant d'avoir un pack de n sujets consécutifs temporellement dans une catégorie
 
 
 rôle :
@@ -44,6 +52,7 @@ modérateur:
 	un modérateur peut lire et modifier tout les messages postés sur la section sous sa responsabilité
   un modérateur peut lire tout les messages du forum
 	un modérateur peut accéder au données public des utilisateurs
+	un modérateur peut modifier ses données d'utilisateur
 	un modérateur peut …
 	un modérateur a accès au fonctions suivantes :
     -
@@ -52,6 +61,7 @@ recruteur :
   un recruteur peut lire et modifier tout les messages postés par lui même
   un recruteur peut lire tout les messages du forum
   un recruteur peut accéder au données public des utilisateurs
+	un recruteur peut modifier ses données d'utilisateur
   un recruteur peut …
   un recruteur a accès au fonctions suivantes :
     -
@@ -60,6 +70,7 @@ utilisateur lambda inscrit :
   un utilisateur lambda inscrit peut lire et modifier tout les messages postés par lui même
   un utilisateur lambda inscrit peut lire tout les messages du forum
   un utilisateur lambda inscrit peut accéder au données public des utilisateurs
+	un utilisateur lambda peut modifier ses données d'utilisateur
   un utilisateur lambda inscrit peut …
   un utilisateur lambda inscrit a accès au fonctions suivantes :
     -
