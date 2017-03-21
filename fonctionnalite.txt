@@ -1,0 +1,64 @@
+Fonctionnalités :
+
+affichage du nombre total de messages
+affichage du nombre total d’utilisateurs
+nombre de connexions/ par tranche horaires ou dates
+nombre de candidats possible pour un recruteur
+nombre de comptes par villes
+tranche d’age des utilisateurs
+
+
+trigger :
+
+modification – moyenne des utilisateurs
+modification – stat connexion / user last connexion
+insertion – stat nb message / messages
+insertion/suppression – user nb messages / messages
+insertion/modification – user rang/ messages
+
+
+vue :
+
+pour le recruteur
+pour les statistiques
+
+
+rôle :
+
+admin :
+	un admin peut lire et modifier tout les messages postés
+	un admin peut accéder à toutes les données et  les modifier de tout les utilisateurs
+	un admin peut …
+	un admin a accès au fonctions suivantes :
+		-
+
+modérateur:
+	un modérateur peut lire et modifier tout les messages postés sur la section sous sa responsabilité
+  un modérateur peut lire tout les messages du forum
+	un modérateur peut accéder au données public des utilisateurs
+	un modérateur peut …
+	un modérateur a accès au fonctions suivantes :
+    -
+
+recruteur :
+  un recruteur peut lire et modifier tout les messages postés par lui même
+  un recruteur peut lire tout les messages du forum
+  un recruteur peut accéder au données public des utilisateurs
+  un recruteur peut …
+  un recruteur a accès au fonctions suivantes :
+    -
+
+utilisateur lambda inscrit :
+  un utilisateur lambda inscrit peut lire et modifier tout les messages postés par lui même
+  un utilisateur lambda inscrit peut lire tout les messages du forum
+  un utilisateur lambda inscrit peut accéder au données public des utilisateurs
+  un utilisateur lambda inscrit peut …
+  un utilisateur lambda inscrit a accès au fonctions suivantes :
+    -
+
+utilisateur lambda non inscrit :
+  un utilisateur lambda non inscrit ne peut pas lire ou modifier aucun messages
+  un utilisateur lambda non inscrit ne peut accéder a aucune information sur les utilisateurs
+  un utilisateur lambda non inscrit peut …
+  un utilisateur lambda non inscrit a accès au fonctions suivantes :
+    -
