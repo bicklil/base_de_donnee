@@ -1,0 +1,135 @@
+% !TEX root = ~/base_de_donnee/LETEX.tex
+\documentclass{report}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+
+\begin{document}
+
+\part{Projet BDD : Forum nouvelles technologies}
+\chapter{Presentation du projet}
+\section{Description du projet}
+
+
+
+Le forum “le E-forum” propose les services suivants:
+création d'utilisateur
+\begin{itemize}
+\item modification d’un profil d’utilisateur
+\item un utilisateur peut poster et lire des messages
+\item un message est contenu dans une unique catégorie
+\item proposition de profil pour recruteur
+\end{itemize}
+
+\section{Description des entités:}
+Utilisateur:
+\begin{itemize}
+		\item Pseudonyme
+		\item Adresse Mail
+		\item Date Naissance
+		\item Sexe
+		\item Ville
+		\item Etude
+		\item Nombre de message
+		\item Moyenne de la qualité des messages
+		\item Langage de programmation connus
+		\item Niveau en programmation
+		\item Date de dernière connexion
+\end{itemize}
+Message:
+\begin{itemize}
+	\item Id message
+	\item Date du message
+	\item Contenu du message
+	\item Qualité du message
+\end{itemize}
+Catégorie
+\begin{itemize}
+	\item Nom de la catégorie
+	\item Popularité
+\end{itemize}
+Sujet
+\begin{itemize}
+	\item Id sujet
+   \item Nom sujet
+	\item Date de creation du sujet
+	\item Popularité du sujet
+\end{itemize}
+	Support
+  \begin{itemize}
+		\item ID du support
+		\item Système d’exploitation
+		\item Navigateur internet
+  \end{itemize}
+	Rang
+  \begin{itemize}
+		\item Nom du rang
+		\item Palier d'accès
+    \end{itemize}
+	Statistiques
+  \begin{itemize}
+		\item Date
+		\item Tranche Horaire
+		\item Nombre de connexions
+		\item Nombre de message postés
+    \end{itemize}
+	Status
+  \begin{itemize}
+		\item Initulé Status
+    \end{itemize}
+	Section
+  \begin{itemize}
+		\item Nom Section
+		\item Popularité Section
+  \end{itemize}
+
+
+\section{Description des fonctionnalités:}
+
+\subsection{Création d'un utilisateur}
+		Il doit remplir les champs suivant : nom, prénom, date 	de naissance, sexe, ville, adresse mail, langage de 			programmation et son niveau et ou domaine d’étude.
+
+\subsection{Modification d’un utilisateur}
+		Tous les utilisateurs peuvent changer leurs informations 	suivantes : ville , études, langage de programmation, niveau 	de programmation.
+
+\subsection{Suppression d’un utilisateur}
+		Si un utilisateur décide de supprimer son compte, on 	conserve le profil mais il passe dans la liste des 	utilisateurs 	supprimés. Ses messages restent disponibles mais le 	pseudo 	passe en «compte supprimé». Le pseudo d'origine ne 	sera pas 	réutilisable par d'autres utilisateurs.
+\subsection{Droit des utilisateurs}
+		Un utilisateur normal peut poster des messages et    	créer des sujets. Il peut supprimer ses propres messages et 	fermer ses propres sujets.
+		Un modérateur est responsable d’une ou plusieurs 	catégorie(s). Il peut modifier et supprimer les 			messages et les sujets des autres utilisateurs et 			promouvoir des utilisateurs au status de recruteur.
+		Un administrateur possède les mêmes droits qu'un 	modérateur mais il peut aussi consulter les stats du 		forum, ainsi que supprimer des utilisateurs.
+		Un recruteur acquiert son status après demande à un 	administrateur ou modérateur. Il dispose des mêmes 	droits 	qu'un utilisateur normal mais dispose en plus d'un accès à un 	outil de recherche de candidats potentiels.
+
+\subsection{Proposition de profil pour recruteur}
+		Un recruteur peut demander certaines conditions 	lors de sa recherche de candidats: un périmètre de 		recherche, âge, sexe, études, langage et le serveur lui 	retournera une liste de 5 profils correspondant au mieux à sa 	recherche.
+
+\subsection{Structure du forum}
+		Le forum est composé de plusieurs sections fixées 	par les administrateurs. (ex:  Informatique, Jeux Vidéos, 	Sciences, Bric-à-Brac …).
+		Ces sections sont composées de catégories, elles 	aussi créées par les administrateurs. Une catégorie 		possède un unique modérateur. (ex: Pour la section 		Informatique, on pourrait retrouver des catégories telles 	que:  Programmation, Matériel, Demande d'aides …).
+		Dans les catégories, les utilisateurs peuvent créer 	des sujets ainsi que poster des messages dans leurs 		sujets et dans les sujets d'autres utilisateurs.
+		Les différents éléments présentés ci-dessus auront 	une note de «qualité», présentée ci-dessous.
+\subsection{Statistiques d’utilisation du forum}
+		A chaque message posté par un utilisateur, son nombre 	de messages s'incrémente.
+		Lorsqu'un message est vu, le compteur de popularité 	correspondant à sa catégorie et sa section augmente de 0.01.
+		A chaque «upvote» sur un message, sa qualité augmente 	de 1.
+		A chaque «downvote» sur un message, sa qualité 	diminue de 0,5.
+		Une moyenne sera calculée pour chaque utilisateur selon 	la qualité de ses messages.
+		Tous les jours à minuit, le serveur, pour chaque 	personne, va calculer sa moyenne de qualité et va lui définir 	un rang.
+		Il va aussi calculer le nombre de message sur la journée 	dans chaque section/catégorie, les périodes de fréquentation, 	la proportion d'âge par catégorie, les préférences de langage 	et le sexe par catégorie.
+		De plus, à chaque connexion/déconnexion, un “tableau” 	de connexion est mis à jour et à minuit le serveur définit les 	plages horaires où le forum a été le plus actif / inactif et reset 	le tableau.
+		A chaque connexion, le serveur détermine le support de 	l’utilisateur.
+
+\chapter{Conception du projet}
+\section{Matrice des DF}
+\section{listes des transitions simplifié des DF}
+\section{Mea}
+\section{modele}
+\chapter{fonctionnalités proposé au niveau de la bdd}
+\section{requetes}
+\section{triggers}
+\section{vues}
+\section{roles}
+\chapter{fonctionnalités proposé au niveau web}
+\end{document}
