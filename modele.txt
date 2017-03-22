@@ -1,24 +1,21 @@
-utilisateur(PseudoUser, AdresseMel, DateNaissance, Sexe, Ville, Etude, nbMessage, MoyenneQualitéMsg, DerniereConnexion, #Rang, IntituleStatus)
+utilisateur(Pseudo, AdresseMel, DateNaissance, Sexe, Ville, Etude, nbMessage, MoyenneQualitéMsg, DerniereConnexion, #NomRang, IntituleStatus)
 
-Status(IntituléStatus)
+Message(IdMessage, DateMessage, Contenu, QualitéMsg, #Pseudo, #IdSujet)
 
-Message(IdMessage, DateMessage, Contenu, Qualité, #PseudoUser, #IdSujet)
+Sujet(IdSujet, NomSujet, DateCreation, PopularitéSujet, #NomCategorie, #Pseudo)
 
-Sujet(IdSujet, NomSujet, DateCreation, Popularité, #NomCategorie, #PseudoUser)
+Catégorie(NomCategorie, popularitéCatégorie, #NomSection)
 
-Catégorie(NomCategorie, popularité, #NomSection)
-
-Section(NomSection, Popularité, #moderateur)
+Section(NomSection, PopularitéSection, #moderateur)
 
 Rang(NomRang, PalierAcces)
 
-Support(Idsupport, systemeExploitation, NavigateurWeb)
+Support(Idsupport, systemeExploitation, NavigateurWeb, #Pseudo)
 
 Statistiques(Date, TrancheHoraire, NbConnections, NbMessagesPostés)
 
-Navigue(#IdSupport, #PseudoUser)
 
-Offrerecrutement(IdAnnonce, DateAnnonce, DateButoire, TypeAnnonce, TypeContrat, MsgAnnonce)
+Offrerecrutement(IdAnnonce, DateAnnonce, DateButoire, TypeAnnonce, TypeContrat, MsgAnnonce, #Pseudo, #AdresseMail)
 
 Msgprive(IdMP, DateMP, ContenuMp, EtatMp, #pseudo-envoi, #pseudo-recoit)
 
