@@ -1,0 +1,29 @@
+utilisateur(PseudoUser, AdresseMel, DateNaissance, Sexe, Ville, Etude, nbMessage, MoyenneQualitéMsg, DerniereConnexion, #Rang, IntituleStatus)
+
+Status(IntituléStatus)
+
+Message(IdMessage, DateMessage, Contenu, Qualité, #PseudoUser, #IdSujet)
+
+Sujet(IdSujet, NomSujet, DateCreation, Popularité, #NomCategorie, #PseudoUser)
+
+Catégorie(NomCategorie, popularité, #NomSection)
+
+Section(NomSection, Popularité, #moderateur)
+
+Rang(NomRang, PalierAcces)
+
+Support(Idsupport, systemeExploitation, NavigateurWeb)
+
+Statistiques(Date, TrancheHoraire, NbConnections, NbMessagesPostés)
+
+Navigue(#IdSupport, #PseudoUser)
+
+Offrerecrutement(IdAnnonce, DateAnnonce, DateButoire, TypeAnnonce, TypeContrat, MsgAnnonce)
+
+Msgprive(IdMP, DateMP, ContenuMp, EtatMp, #pseudo-envoi, #pseudo-recoit)
+
+Programmation(LangageProg)
+
+utilisateurProgrammation(#pseudo,#langageProg, NiveauProg, DispoRct)
+
+offreRecrutementProgrammation(#Idannonce,#langageProg, NiveauDemande)
