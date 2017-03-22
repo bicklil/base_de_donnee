@@ -38,60 +38,60 @@ Utilisateur:
 		\item Moyenne de la qualité des messages
 		\item Langage de programmation connus
 		\item Niveau en programmation
-		\item Date de dernière connexion
+		\item Date de dernière connexion\\
 \end{itemize}
 Message:
 \begin{itemize}
 	\item Id message
 	\item Date du message
 	\item Contenu du message
-	\item Qualité du message
+	\item Qualité du message\\
 \end{itemize}
 Catégorie
 \begin{itemize}
 	\item Nom de la catégorie
-	\item Popularité
+	\item Popularité\\
 \end{itemize}
 Sujet
 \begin{itemize}
 	\item Id sujet
    \item Nom sujet
 	\item Date de creation du sujet
-	\item Popularité du sujet
+	\item Popularité du sujet\\
 \end{itemize}
 	Support
   \begin{itemize}
 		\item ID du support
 		\item Système d’exploitation
-		\item Navigateur internet
+		\item Navigateur internet\\
   \end{itemize}
 	Rang
   \begin{itemize}
 		\item Nom du rang
-		\item Palier d'accès
+		\item Palier d'accès\\
     \end{itemize}
 	Statistiques
   \begin{itemize}
 		\item Date
 		\item Tranche Horaire
 		\item Nombre de connexions
-		\item Nombre de message postés
+		\item Nombre de message postés\\
     \end{itemize}
 	Status
   \begin{itemize}
-		\item Initulé Status
+		\item Initulé Status\\
     \end{itemize}
 	Section
   \begin{itemize}
 		\item Nom Section
-		\item Popularité Section
+		\item Popularité Section\\
   \end{itemize}
 
 
 \section{Description des fonctionnalités:}
 
 \subsection{Création d'un utilisateur}
-		Il doit remplir les champs suivant : nom, prénom, date 	de naissance, sexe, ville, adresse mail, langage de 			programmation et son niveau et ou domaine d’étude.
+		Il doit remplir les champs suivant : nom, prénom, date 	de naissance, sexe, ville, adresse mail, langage de programmation et son niveau et ou domaine d’étude.
 
 \subsection{Modification d’un utilisateur}
 		Tous les utilisateurs peuvent changer leurs informations 	suivantes : ville , études, langage de programmation, niveau 	de programmation.
@@ -99,123 +99,123 @@ Sujet
 \subsection{Suppression d’un utilisateur}
 		Si un utilisateur décide de supprimer son compte, on 	conserve le profil mais il passe dans la liste des 	utilisateurs 	supprimés. Ses messages restent disponibles mais le 	pseudo 	passe en «compte supprimé». Le pseudo d'origine ne 	sera pas 	réutilisable par d'autres utilisateurs.
 \subsection{Droit des utilisateurs}
-		Un utilisateur normal peut poster des messages et    	créer des sujets. Il peut supprimer ses propres messages et 	fermer ses propres sujets.
-		Un modérateur est responsable d’une ou plusieurs 	catégorie(s). Il peut modifier et supprimer les 			messages et les sujets des autres utilisateurs et 			promouvoir des utilisateurs au status de recruteur.
+		Un utilisateur normal peut poster des messages et    	créer des sujets. Il peut supprimer ses propres messages et 	fermer ses propres sujets.\\
+		Un modérateur est responsable d’une ou plusieurs 	catégorie(s). Il peut modifier et supprimer les 			messages et les sujets des autres utilisateurs et 			promouvoir des utilisateurs au status de recruteur.\\
 		Un administrateur possède les mêmes droits qu'un 	modérateur mais il peut aussi consulter les stats du 		forum, ainsi que supprimer des utilisateurs.
-		Un recruteur acquiert son status après demande à un 	administrateur ou modérateur. Il dispose des mêmes 	droits 	qu'un utilisateur normal mais dispose en plus d'un accès à un 	outil de recherche de candidats potentiels.
+		Un recruteur acquiert son status après demande à un 	administrateur ou modérateur. Il dispose des mêmes 	droits 	qu'un utilisateur normal mais dispose en plus d'un accès à un 	outil de recherche de candidats potentiels.\\
 
 \subsection{Proposition de profil pour recruteur}
 		Un recruteur peut demander certaines conditions 	lors de sa recherche de candidats: un périmètre de 		recherche, âge, sexe, études, langage et le serveur lui 	retournera une liste de 5 profils correspondant au mieux à sa 	recherche.
 
 \subsection{Structure du forum}
-		Le forum est composé de plusieurs sections fixées 	par les administrateurs. (ex:  Informatique, Jeux Vidéos, 	Sciences, Bric-à-Brac …).
-		Ces sections sont composées de catégories, elles 	aussi créées par les administrateurs. Une catégorie 		possède un unique modérateur. (ex: Pour la section 		Informatique, on pourrait retrouver des catégories telles 	que:  Programmation, Matériel, Demande d'aides …).
-		Dans les catégories, les utilisateurs peuvent créer 	des sujets ainsi que poster des messages dans leurs 		sujets et dans les sujets d'autres utilisateurs.
-		Les différents éléments présentés ci-dessus auront 	une note de «qualité», présentée ci-dessous.
+		Le forum est composé de plusieurs sections fixées 	par les administrateurs. (ex:  Informatique, Jeux Vidéos, 	Sciences, Bric-à-Brac …).\\
+		Ces sections sont composées de catégories, elles 	aussi créées par les administrateurs. Une catégorie 		possède un unique modérateur. (ex: Pour la section 		Informatique, on pourrait retrouver des catégories telles 	que:  Programmation, Matériel, Demande d'aides …).\\
+		Dans les catégories, les utilisateurs peuvent créer 	des sujets ainsi que poster des messages dans leurs 		sujets et dans les sujets d'autres utilisateurs.\\
+		Les différents éléments présentés ci-dessus auront 	une note de «qualité», présentée ci-dessous.\\
 \subsection{Statistiques d’utilisation du forum}
-		A chaque message posté par un utilisateur, son nombre 	de messages s'incrémente.
-		Lorsqu'un message est vu, le compteur de popularité 	correspondant à sa catégorie et sa section augmente de 0.01.
-		A chaque «upvote» sur un message, sa qualité augmente 	de 1.
-		A chaque «downvote» sur un message, sa qualité 	diminue de 0,5.
+		A chaque message posté par un utilisateur, son nombre 	de messages s'incrémente.\\
+		Lorsqu'un message est vu, le compteur de popularité 	correspondant à sa catégorie et sa section augmente de 0.01.\\
+		A chaque «upvote» sur un message, sa qualité augmente 	de 1.\\
+		A chaque «downvote» sur un message, sa qualité 	diminue de 0,5.\\
 		Une moyenne sera calculée pour chaque utilisateur selon 	la qualité de ses messages.
-		Tous les jours à minuit, le serveur, pour chaque 	personne, va calculer sa moyenne de qualité et va lui définir 	un rang.
-		Il va aussi calculer le nombre de message sur la journée 	dans chaque section/catégorie, les périodes de fréquentation, 	la proportion d'âge par catégorie, les préférences de langage 	et le sexe par catégorie.
+		Tous les jours à minuit, le serveur, pour chaque 	personne, va calculer sa moyenne de qualité et va lui définir 	un rang.\\
+		Il va aussi calculer le nombre de message sur la journée 	dans chaque section/catégorie, les périodes de fréquentation, 	la proportion d'âge par catégorie, les préférences de langage 	et le sexe par catégorie.\\
 		De plus, à chaque connexion/déconnexion, un “tableau” 	de connexion est mis à jour et à minuit le serveur définit les 	plages horaires où le forum a été le plus actif / inactif et reset 	le tableau.
-		A chaque connexion, le serveur détermine le support de 	l’utilisateur.
+		A chaque connexion, le serveur détermine le support de 	l’utilisateur.\\
 
 \chapter{Conception du projet}
 \section{Matrice des DF}
 \begin{supertabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline 
-A->B &  & 1 & 12 & 16 & 18 & 22 & 25 & 27 & 31 & 32 & 9 & 9+1 & 36 & 39 & 36+9 \\ 
-\hline 
-1 & Pseudo & x & x &  & x & x &  &  &  &  &  &  & x & x & \\ 
-\hline 
-2 & AdresseMail & x & x &  & x & x &  &  &  &  &  &  & x & x & \\ 
-\hline 
-3 & DateNaissance & x & x &  & x & x &  &  &  &  &  &  & x & x & \\ 
-\hline 
-4 & Sexe & x & x &  & x & x &  &  &  &  &  &  & x & x &  \\ 
-\hline 
-5 & Ville & x & x &  & x & x &  &  &  &  &  &  & x & x & \\ 
-\hline 
-6 & Etude & x & x &  & x & x &  &  &  &  &  &  & x & x & \\ 
-\hline 
-7 & NbMessage & x & x &  & x & x &  &  &  &  &  &  & x & x & \\ 
-\hline 
-8 & MoyQualitéMsg & x & x &  & x & x &  &  &  &  &  &  & x & x & \\ 
-\hline 
-9 & LangageProg &  &  &  &  &  &  &  &  &  & x &  & x &  & \\ 
-\hline 
-10 & NiveauProg &  &  &  &  &  &  &  &  &  &  & x &  &  & x\\ 
-\hline 
-11 & DateDerniereConnection & x & x &  & x & x &  &  &  &  &  &  & x & x & \\ 
-\hline 
-12 & IdMsg &  & x &  &  &  &  &  &  &  &  &  &  &  & \\ 
-\hline 
-13 & DateMsg &  & x &  &  &  &  &  &  &  &  &  &  &  &   \\ 
-\hline 
-14 & ContenuMsg &  & x &  &  &  &  &  &  &  &  &  &  &  & \\ 
-\hline 
-15 & QualitéMsg &  & x &  &  &  &  &  &  &  &  &  &  &  &  \\ 
-\hline 
-16 & NomCatégorie &  & x & x & x &  &  &  &  &  &  &  &  &  & \\ 
-\hline 
-17 & PopularitéCatégorie &  & x & x & x &  &  &  &  &  &  &  &  &  & \\ 
-\hline 
-18 & IdSujet &  & x &  & x &  &  &  &  &  &  &  &  &  & \\ 
-\hline 
-19 & NomSujet &  & x &  & x &  &  &  &  &  &  &  &  &  & \\ 
-\hline 
-20 & DateCreationSujet &  & x &  & x &  &  &  &  &  &  &  &  &  & \\ 
-\hline 
-21 & PopularitéSujet &  & x &  & x &  &  &  &  &  &  &  &  &  & \\ 
-\hline 
-22 & IdSupport &  &  &  &  & x &  &  &  &  &  &  &  &  & \\ 
-\hline 
-23 & SystemeExploitation &  &  &  &  & x &  &  &  &  &  &  &  &  & \\ 
-\hline 
-24 & NavigateurInternet &  &  &  &  & x &  &  &  &  &  &  &  &  & \\ 
-\hline 
-25 & NomRang & x & x &  & x & x & x &  &  &  &  &  & x & x & \\ 
-\hline 
-26 & PalierAcces & x & x &  & x & x & x &  &  &  &  &  & x & x & \\ 
-\hline 
-27 & Date &  &  &  &  &  &  & x &  &  &  &  &  &  & \\ 
-\hline 
-28 & TrancheHoraire &  &  &  &  &  &  & x &  &  &  &  &  &  & \\ 
-\hline 
-29 & NombreConnec &  &  &  &  &  &  & x &  &  &  &  &  &  & \\ 
-\hline 
-30 & NombreMsgPostés &  &  &  &  &  &  & x &  &  &  &  &  &  & \\ 
-\hline 
-31 & IntituléStatus & x & x &  & x & x &  &  & x &  &  &  & x & x & \\ 
-\hline 
-32 & NomSection &  & x & x & x &  &  &  &  & x &  &  &  &  & \\ 
-\hline 
-33 & PopularitéSection &  & x & x & x &  &  &  &  & x &  &  &  &  & \\ 
-\hline 
-34 & DateAnnonce &  &  &  &  &  &  &  &  &  &  &  & x &  & \\ 
-\hline 
-35 & DateButoire &  &  &  &  &  &  &  &  &  &  &  & x &  & \\ 
-\hline 
-36 & IdAnnonce &  &  &  &  &  &  &  &  &  &  &  & x &  & \\ 
-\hline 
-37 & TypeAnnonce &  &  &  &  &  &  &  &  &  &  &  & x &  & \\ 
-\hline 
-38 & MsgAnnonce &  &  &  &  &  &  &  &  &  &  &  & x &  & \\ 
-\hline 
-39 & IdMP &  &  &  &  &  &  &  &  &  &  &  &  & x & \\ 
-\hline 
-40 & DateMP &  &  &  &  &  &  &  &  &  &  &  &  & x  & \\ 
-\hline 
-41 & ContenuMP &  &  &  &  &  &  &  &  &  &  &  &  & x & \\ 
 \hline
-42 & EtatMP &  &  &  &  &  &  &  &  &  &  &  &  & x  & \\ 
+A->B &  & 1 & 12 & 16 & 18 & 22 & 25 & 27 & 31 & 32 & 9 & 9+1 & 36 & 39 & 36+9 \\
+\hline
+1 & Pseudo & x & x &  & x & x &  &  &  &  &  &  & x & x & \\
+\hline
+2 & AdresseMail & x & x &  & x & x &  &  &  &  &  &  & x & x & \\
+\hline
+3 & DateNaissance & x & x &  & x & x &  &  &  &  &  &  & x & x & \\
+\hline
+4 & Sexe & x & x &  & x & x &  &  &  &  &  &  & x & x &  \\
+\hline
+5 & Ville & x & x &  & x & x &  &  &  &  &  &  & x & x & \\
+\hline
+6 & Etude & x & x &  & x & x &  &  &  &  &  &  & x & x & \\
+\hline
+7 & NbMessage & x & x &  & x & x &  &  &  &  &  &  & x & x & \\
+\hline
+8 & MoyQualitéMsg & x & x &  & x & x &  &  &  &  &  &  & x & x & \\
+\hline
+9 & LangageProg &  &  &  &  &  &  &  &  &  & x &  & x &  & \\
+\hline
+10 & NiveauProg &  &  &  &  &  &  &  &  &  &  & x &  &  & x\\
+\hline
+11 & DateDerniereConnection & x & x &  & x & x &  &  &  &  &  &  & x & x & \\
+\hline
+12 & IdMsg &  & x &  &  &  &  &  &  &  &  &  &  &  & \\
+\hline
+13 & DateMsg &  & x &  &  &  &  &  &  &  &  &  &  &  &   \\
+\hline
+14 & ContenuMsg &  & x &  &  &  &  &  &  &  &  &  &  &  & \\
+\hline
+15 & QualitéMsg &  & x &  &  &  &  &  &  &  &  &  &  &  &  \\
+\hline
+16 & NomCatégorie &  & x & x & x &  &  &  &  &  &  &  &  &  & \\
+\hline
+17 & PopularitéCatégorie &  & x & x & x &  &  &  &  &  &  &  &  &  & \\
+\hline
+18 & IdSujet &  & x &  & x &  &  &  &  &  &  &  &  &  & \\
+\hline
+19 & NomSujet &  & x &  & x &  &  &  &  &  &  &  &  &  & \\
+\hline
+20 & DateCreationSujet &  & x &  & x &  &  &  &  &  &  &  &  &  & \\
+\hline
+21 & PopularitéSujet &  & x &  & x &  &  &  &  &  &  &  &  &  & \\
+\hline
+22 & IdSupport &  &  &  &  & x &  &  &  &  &  &  &  &  & \\
+\hline
+23 & SystemeExploitation &  &  &  &  & x &  &  &  &  &  &  &  &  & \\
+\hline
+24 & NavigateurInternet &  &  &  &  & x &  &  &  &  &  &  &  &  & \\
+\hline
+25 & NomRang & x & x &  & x & x & x &  &  &  &  &  & x & x & \\
+\hline
+26 & PalierAcces & x & x &  & x & x & x &  &  &  &  &  & x & x & \\
+\hline
+27 & Date &  &  &  &  &  &  & x &  &  &  &  &  &  & \\
+\hline
+28 & TrancheHoraire &  &  &  &  &  &  & x &  &  &  &  &  &  & \\
+\hline
+29 & NombreConnec &  &  &  &  &  &  & x &  &  &  &  &  &  & \\
+\hline
+30 & NombreMsgPostés &  &  &  &  &  &  & x &  &  &  &  &  &  & \\
+\hline
+31 & IntituléStatus & x & x &  & x & x &  &  & x &  &  &  & x & x & \\
+\hline
+32 & NomSection &  & x & x & x &  &  &  &  & x &  &  &  &  & \\
+\hline
+33 & PopularitéSection &  & x & x & x &  &  &  &  & x &  &  &  &  & \\
+\hline
+34 & DateAnnonce &  &  &  &  &  &  &  &  &  &  &  & x &  & \\
+\hline
+35 & DateButoire &  &  &  &  &  &  &  &  &  &  &  & x &  & \\
+\hline
+36 & IdAnnonce &  &  &  &  &  &  &  &  &  &  &  & x &  & \\
+\hline
+37 & TypeAnnonce &  &  &  &  &  &  &  &  &  &  &  & x &  & \\
+\hline
+38 & MsgAnnonce &  &  &  &  &  &  &  &  &  &  &  & x &  & \\
+\hline
+39 & IdMP &  &  &  &  &  &  &  &  &  &  &  &  & x & \\
+\hline
+40 & DateMP &  &  &  &  &  &  &  &  &  &  &  &  & x  & \\
+\hline
+41 & ContenuMP &  &  &  &  &  &  &  &  &  &  &  &  & x & \\
+\hline
+42 & EtatMP &  &  &  &  &  &  &  &  &  &  &  &  & x  & \\
 \hline
 43 & DispoRct &  &  &  &  &  &  &  &  &  &   & x &  &  & \\
 \hline
-\end{supertabular} 
+\end{supertabular}
 \section{Listes des transitions simplifié des DF}
 \begin{supertabular}{|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
@@ -245,10 +245,109 @@ A->B &  & 1 & 12 & 16 & 18 & 22 & 25 & 27 & 31 & 32 & 9 & 9+1 & 36 & 39 & 36+9 \
 \newpage
 \includepdf[pages={1},angle=270,pagecommand=\section{Mea}]{MEA.pdf}
 \section{Modele}
+utilisateur(\underline{Pseudo}, \underline{AdresseMel}, DateNaissance, Sexe, Ville, Etude, nbMessage, MoyenneQualitéMsg, DerniereConnexion, \#NomRang, IntituleStatus)\\
+
+Message(\underline{IdMessage}, DateMessage, Contenu, QualitéMsg, \#Pseudo, \#IdSujet)\\
+
+Sujet(\underline{IdSujet}, NomSujet, DateCreation, PopularitéSujet, \#NomCategorie, \#Pseudo)\\
+
+Catégorie(\underline{NomCategorie}, popularitéCatégorie, \#NomSection)\\
+
+Section(\underline{NomSection}, PopularitéSection, \#moderateur)\\
+
+Rang(\underline{NomRang}, PalierAcces)\\
+
+Support(\underline{Idsupport}, systemeExploitation, NavigateurWeb, \#Pseudo)\\
+
+Statistiques(\underline{Date}, \underline{TrancheHoraire}, NbConnections, NbMessagesPostés)\\
+
+
+Offrerecrutement(\underline{IdAnnonce}, DateAnnonce, DateButoire, TypeAnnonce, TypeContrat, MsgAnnonce, \#Pseudo, \#AdresseMail)\\
+
+Msgprive(\underline{IdMP}, DateMP, ContenuMp, EtatMp, \#pseudo-envoi, \#pseudo-recoit)\\
+
+Programmation(\underline{LangageProg})\\
+
+utilisateurProgrammation(\underline{\#pseudo},\underline{\#langageProg}, NiveauProg, DispoRct)\\
+
+offreRecrutementProgrammation(\underline{\#Idannonce},\underline{\#langageProg}, NiveauDemande)\\
+
 \chapter{Fonctionnalités proposé au niveau de la bdd}
 \section{Requetes}
+affichage du nombre total de messages\\
+affichage du nombre total d’utilisateurs\\
+affichage de tous les messages d'un utilisateur\\
+affichage de tous les messages d'un utilisateur dans une tranche horaire\\
+affichage de tous les messages d'un sujet\\
+affichage de tous les messages privés d'une personne\\
+affichage de tous les messages privés provenant d'une certaine personne\\
+affichage des proportions des systèmes d'exploitations utilisés\\
+affichage des proportions des navigateurs internet utilisés\\
+nombre de connexions tranche horaire\\
+nombre de connexions par date\\
+nombre de messages postés par tranche horaire\\
+nombre de messages postés par dates\\
+nombre de candidats possible pour un recruteur\\
+nombre de comptes par villes\\
+tranche d’age des utilisateurs\\
+liste de message contenant un motif\\
+recherche de profil en fonction du niveau et type de programmation\\
+recherche d'un profil en fonction d'un pseudo\\
+nombre de messages par catégorie\\
+nombre de sujet par catégorie\\
+affichage toutes les annonces en fonction du langage/type contrat\\
 \section{Triggers}
+insertion/modification/suppression d'un message - modification de la moyennequalitémsg de l'utilisateur concerné\\
+modification à la connexion d'un utilisateur - modification de la stat de connexions par heure et de la date de dernière connexion de l'utilisateur\\
+insertion d'un message - modification de la stat de messages par heure\\
+insertion/suppression d'un message - modification du nombre de message\\
+insertion/modification d'un message - check s'il faut changer de rang\\
+insertion d'un utilisateur - vérification des informations (unicité du pseudo, mail valide)\\
+insertion d'une demande de recrutement - vérification de la date limite de dépot\\
+insertion d'une offre de recrutement - vérification dateButoire > DateAnnonce\\
+modification de modérateur - vérification qu'il n'y a qu'un seul modérateur par section\\
 \section{Vues}
+une vue permettant d'accèder au profil les plus favorables pour un recruteur\\
+une vue permettant d'avoir un pack de n messages consécutifs temporellement dans un sujet\\
+une vue permettant d'avoir un pack de n sujets consécutifs temporellement dans une catégorie
+
 \section{Roles}
-\chapter{Fonctionnalités proposé au niveau web}
+administrateur:
+\begin{itemize}
+	\item un administrateur peut lire et modifier tout les messages postés
+	\item un administrateur peut accéder à toutes les données et  les modifier de tout les utilisateurs
+	\item un administrateur peut accéder à toutes les statistiques\\
+\end{itemize}
+
+modérateur:
+\begin{itemize}
+	\item un modérateur peut lire et modifier tout les messages postés sur la section sous sa responsabilité
+  \item un modérateur peut lire tout les messages du forum
+	\item un modérateur peut accéder au données public des utilisateurs\\
+\end{itemize}
+
+
+recruteur:
+\begin{itemize}
+  \item un recruteur peut lire et modifier tout les messages postés par lui même
+  \item un recruteur peut lire tout les messages du forum
+  \item un recruteur peut accéder au données public des utilisateurs\\
+\end{itemize}
+
+
+
+utilisateur lambda inscrit:
+\begin{itemize}
+  \item un utilisateur lambda inscrit peut lire et modifier tout les messages postés par lui même
+  \item un utilisateur lambda inscrit peut lire tout les messages du forum
+  \item un utilisateur lambda inscrit peut accéder au données public des utilisateurs\\
+\end{itemize}
+
+
+utilisateur lambda non inscrit:
+\begin{itemize}
+  \item un utilisateur lambda non inscrit ne peut pas lire ou modifier aucun messages
+  \item un utilisateur lambda non inscrit ne peut accéder a aucune information sur les utilisateurs\\
+\end{itemize}
+
 \end{document}

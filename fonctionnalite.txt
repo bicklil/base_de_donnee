@@ -33,24 +33,19 @@ modification à la connexion d'un utilisateur – modification de la stat de con
 insertion d'un message – modification de la stat de messages par heure
 insertion/suppression d'un message – modification du nombre de message
 insertion/modification d'un message – check s'il faut changer de rang
-<<<<<<< HEAD
 insertion d'un utilisateur - vérification des informations (unicité du pseudo, mail valide)
-=======
 insertion d'une demande de recrutement - vérification de la date limite de dépot
 insertion d'une offre de recrutement - vérification dateButoire > DateAnnonce
 modification de modérateur - vérification qu'il n'y a qu'un seul modérateur par section
->>>>>>> de51f774f898d8a2f8577a4d5c3a8b1880bd0ecd
 
 
 vue :
 
 une vue permettant d'accèder au profil les plus favorables pour un recruteur
 une vue permettant d'avoir un pack de n messages consécutifs temporellement dans un sujet
-<<<<<<< HEAD
 une vue permettant d'avoir un pack de n sujets consécutifs temporellement dans une catégorie
-=======
-une vue permettant d'avoir un pack de n sujet consécutifs temporellement dans une catégorie
->>>>>>> de51f774f898d8a2f8577a4d5c3a8b1880bd0ecd
+
+
 
 
 rôle :
@@ -64,37 +59,20 @@ modérateur:
 	un modérateur peut lire et modifier tout les messages postés sur la section sous sa responsabilité
   un modérateur peut lire tout les messages du forum
 	un modérateur peut accéder au données public des utilisateurs
-<<<<<<< HEAD
-	un modérateur peut modifier ses données d'utilisateur
-	un modérateur peut …
-	un modérateur a accès au fonctions suivantes :
-    -
-=======
->>>>>>> de51f774f898d8a2f8577a4d5c3a8b1880bd0ecd
+
 
 recruteur :
   un recruteur peut lire et modifier tout les messages postés par lui même
   un recruteur peut lire tout les messages du forum
   un recruteur peut accéder au données public des utilisateurs
-<<<<<<< HEAD
-	un recruteur peut modifier ses données d'utilisateur
-  un recruteur peut …
-  un recruteur a accès au fonctions suivantes :
-    -
-=======
->>>>>>> de51f774f898d8a2f8577a4d5c3a8b1880bd0ecd
+
+
 
 utilisateur lambda inscrit :
   un utilisateur lambda inscrit peut lire et modifier tout les messages postés par lui même
   un utilisateur lambda inscrit peut lire tout les messages du forum
   un utilisateur lambda inscrit peut accéder au données public des utilisateurs
-<<<<<<< HEAD
-	un utilisateur lambda peut modifier ses données d'utilisateur
-  un utilisateur lambda inscrit peut …
-  un utilisateur lambda inscrit a accès au fonctions suivantes :
-    -
-=======
->>>>>>> de51f774f898d8a2f8577a4d5c3a8b1880bd0ecd
+
 
 utilisateur lambda non inscrit :
   un utilisateur lambda non inscrit ne peut pas lire ou modifier aucun messages
