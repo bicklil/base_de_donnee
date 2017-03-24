@@ -21,4 +21,4 @@ DROP DOMAIN Contrat;
 DROP DOMAIN Langage;
 DROP DOMAIN Niveau;
 
---DROP SCHEMA Eforum;
+DROP SCHEMA Eforum;
