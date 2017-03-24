@@ -12,3 +12,13 @@ DROP TABLE UtilisateurProgrammation;
 DROP TABLE OffreRecrutementProgrammation;
 
 DROP DOMAIN Status;
+DROP DOMAIN DomRang;
+DROP DOMAIN OS;
+DROP DOMAIN WebBrowser;
+DROP DOMAIN Heures;
+DROP DOMAIN Annonce;
+DROP DOMAIN Contrat;
+DROP DOMAIN Langage;
+DROP DOMAIN Niveau;
+
+--DROP SCHEMA Eforum;
