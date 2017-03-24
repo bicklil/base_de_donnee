@@ -24,7 +24,7 @@ CREATE TABLE Utilisateur ( Pseudo VARCHAR(20) PRIMARY KEY,
 						   NbMessage INTEGER NOT NULL,
 						   MoyQualiteMsg FLOAT NOT NULL,
 						   DateDernierCo DATE,
-						   IntituléStatus Status,
+						   IntituleStatus Status,
 						   NomRang VARCHAR(20) NOT NULL REFERENCES Rang on DELETE cascade);
 
 CREATE TABLE Section ( NomSection VARCHAR(30) PRIMARY KEY,
