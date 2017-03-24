@@ -25,34 +25,34 @@ CREATE TABLE Utilisateur ( Pseudo VARCHAR(20) PRIMARY KEY,
 						   MoyQualiteMsg FLOAT NOT NULL,
 						   DateDernierCo DATE,
 						   IntituléStatus Status,
-						   NomRang VARCHAR(20) NOT NULL REFERENCES Rang);
+						   NomRang VARCHAR(20) NOT NULL REFERENCES Rang on DELETE cascade);
 
 CREATE TABLE Section ( NomSection VARCHAR(30) PRIMARY KEY,
 					   PopulariteSection FLOAT NOT NULL,
-					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur);
+					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
 						 PopulariteCategorie FLOAT NOT NULL,
-						 NomSection VARCHAR(30) NOT NULL REFERENCES Section);
+						 NomSection VARCHAR(30) NOT NULL REFERENCES Section on DELETE cascade);
 
 CREATE TABLE Sujet ( IdSujet INTEGER PRIMARY KEY,
 					 NomSujet VARCHAR(50) NOT NULL,
 					 DateCreationSujet DATE NOT NULL,
 					 PopulariteSujet FLOAT NOT NULL,
-                     NomCategorie VARCHAR(30) NOT NULL REFERENCES Categorie,
-				     Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur );
+                     NomCategorie VARCHAR(30) NOT NULL REFERENCES Categorie on DELETE cascade,
+				     Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE Message ( IdMessage INTEGER PRIMARY KEY,
 					   DateMessage Date NOT NULL,
 					   Contenu VARCHAR(1000) NOT NULL,
 					   QualiteMsg FLOAT NOT NULL,
-				       Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur,
-					   IdSujet INTEGER NOT NULL REFERENCES Sujet);
+				       Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,
+					   IdSujet INTEGER NOT NULL REFERENCES Sujet on DELETE cascade);
 
 CREATE TABLE Support ( IdSupport INTEGER PRIMARY KEY,
 					   SystemeExploitation OS,
 					   NavigateurInternet WebBrowser,
-					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur);					   
+					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);					   
 
 CREATE TABLE Statistiques ( DateStat DATE,
                             TrancheHoraire Heures,
@@ -66,26 +66,26 @@ CREATE TABLE OffreRecrutement ( IdAnnonce INTEGER PRIMARY KEY,
                                 TypeAnnonce Annonce,
                                 TypeContrat Contrat,
                                 MsgAnnonce VARCHAR(1000) NOT NULL,
-                                Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur,
-                                AdresseMail VARCHAR(50) NOT NULL REFERENCES Utilisateur);
+                                Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,
+                                AdresseMail VARCHAR(50) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE MsgPrive ( IdMP INTEGER PRIMARY KEY,
                         DateMP DATE NOT NULL,
                         ContenuMP VARCHAR(1000) NOT NULL,
                         EtatMP BOOLEAN NOT NULL,
-                        PseudoEnvoi VARCHAR(20) NOT NULL REFERENCES Utilisateur,
-                        PseudoRecoit VARCHAR(20) NOT NULL REFERENCES Utilisateur);
+                        PseudoEnvoi VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,
+                        PseudoRecoit VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE Programmation ( LangageProg Langage PRIMARY KEY);
 
-CREATE TABLE UtilisateurProgrammation ( Pseudo VARCHAR(20) REFERENCES Utilisateur,
-                                        LangageProg Langage REFERENCES Programmation,
+CREATE TABLE UtilisateurProgrammation ( Pseudo VARCHAR(20) REFERENCES Utilisateur on DELETE cascade,
+                                        LangageProg Langage REFERENCES Programmation on DELETE cascade,
                                         NiveauProg Niveau,
                                         DispoRct BOOLEAN,
                                         CONSTRAINT PK_UtilisateurProgrammation PRIMARY KEY (Pseudo, LangageProg));
 
-CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER REFERENCES OffreRecrutement,
-                                            LangageProg Langage REFERENCES Programmation,
+CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER REFERENCES OffreRecrutement on DELETE cascade,
+                                            LangageProg Langage REFERENCES Programmation on DELETE cascade,
                                             NiveauDemande Niveau,
                                             CONSTRAINT PK_OffreRecrutementProgrammation PRIMARY KEY (IdAnnonce, LangageProg));
 
