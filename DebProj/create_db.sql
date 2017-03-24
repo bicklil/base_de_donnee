@@ -15,8 +15,8 @@ CREATE DOMAIN Niveau AS VARCHAR(20) CHECK (VALUE IN ('Pas bon', 'Bon', 'Trop bon
 CREATE TABLE Rang ( NomRang DomRang PRIMARY KEY,
                     PallierAcces FLOAT NOT NULL);
 
-CREATE TABLE Utilisateur ( Pseudo VARCHAR(20),
-						   AdresseMail VARCHAR(50),
+CREATE TABLE Utilisateur ( Pseudo VARCHAR(20) PRIMARY KEY,
+						   AdresseMail VARCHAR(50) NOT NULL UNIQUE,
 						   DateNaissance DATE NOT NULL,
 						   Sexe VARCHAR(1) NOT NULL,
 						   Ville VARCHAR(10),
@@ -25,12 +25,11 @@ CREATE TABLE Utilisateur ( Pseudo VARCHAR(20),
 						   MoyQualiteMsg FLOAT NOT NULL,
 						   DateDernierCo DATE,
 						   IntituléStatus Status,
-						   NomRang VARCHAR(20) NOT NULL REFERENCES Rang,
-                           CONSTRAINT PK_Utilisateur PRIMARY KEY (Pseudo, AdresseMail) );
+						   NomRang VARCHAR(20) NOT NULL REFERENCES Rang);
 
 CREATE TABLE Section ( NomSection VARCHAR(30) PRIMARY KEY,
 					   PopulariteSection FLOAT NOT NULL,
-					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur.Pseudo);
+					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur);
 
 CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
 						 PopulariteCategorie FLOAT NOT NULL,
