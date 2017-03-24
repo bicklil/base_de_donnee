@@ -3,7 +3,7 @@ returns trigger
 as $$
 	begin
 	update Utilisateur
-	set NbMessage -= 1
+	set NbMessage = NbMessage - 1
 	where pseudo = old.pseudo;
 	return old;
 	end;
@@ -21,7 +21,7 @@ returns trigger
 as $$
 	begin
 	update Utilisateur
-	set NbMessage += 1
+	set NbMessage = NbMessage + 1
 	where pseudo = new.pseudo;
 	return new;
 	end;
@@ -35,19 +35,20 @@ create trigger update_nb_message_insert
 	execute procedure update_nb_message_insert();
 
 create or replace function update_stat_nb_message_heure()
-	declare heure Integer;
-	declare jour date;
-	return trigger
+	returns trigger
 	as $$
-		heure = select extract(hour from localtime);
-		jour = select current_date;
-		if (select DateStat from Statistiques where DateStat=jour and heure = TrancheHoraire; = NULL)then
+	declare heure integer;
+	declare jour date;
+	begin
+		select extract(hour from localtime) as heure;
+		perform  DateStat from Statistiques where DateStat=current_date and heure = TrancheHoraire;
+		if not found then
 			insert into Statistiques
-				values (jour,heure,0,0);
-		endif;
+				values (current_date,heure,0,0);
+		end if;
 		update Statistiques
-			set NbConnec += 1
-			where jour = DateStat
+			set NbMsgPostes = NbMsgPostes + 1
+			where current_date = DateStat
 			and heure = TrancheHoraire;
 
 	return new;
@@ -55,8 +56,8 @@ create or replace function update_stat_nb_message_heure()
 	$$ language plpgsql;
 
 
-	create trigger update_stat_nb_message_heure
-		after insert
-		on Message
-		for each row
-		execute procedure update_stat_nb_message_heure();
+create trigger update_stat_nb_message_heure
+	after insert
+	on Message
+	for each row
+	execute procedure update_stat_nb_message_heure();
