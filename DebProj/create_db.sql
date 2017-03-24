@@ -12,8 +12,11 @@ CREATE DOMAIN Contrat AS VARCHAR(20) CHECK (VALUE IN ('CDD', 'CDI', 'STAGE'));
 CREATE DOMAIN Langage AS VARCHAR(20) CHECK (VALUE IN ('Py', 'C', '...'));
 CREATE DOMAIN Niveau AS VARCHAR(20) CHECK (VALUE IN ('Pas bon', 'Bon', 'Trop bon'));
 
-CREATE TABLE Utilisateur ( Pseudo VARCHAR(20) PRIMARY KEY,
-						   AdresseMail VARCHAR(50) PRIMARY KEY,
+CREATE TABLE Rang ( NomRang DomRang PRIMARY KEY,
+                    PallierAcces FLOAT NOT NULL);
+
+CREATE TABLE Utilisateur ( Pseudo VARCHAR(20),
+						   AdresseMail VARCHAR(50),
 						   DateNaissance DATE NOT NULL,
 						   Sexe VARCHAR(1) NOT NULL,
 						   Ville VARCHAR(10),
@@ -22,14 +25,16 @@ CREATE TABLE Utilisateur ( Pseudo VARCHAR(20) PRIMARY KEY,
 						   MoyQualiteMsg FLOAT NOT NULL,
 						   DateDernierCo DATE,
 						   IntituléStatus Status,
-						   NomRang VARCHAR(20) NOT NULL REFERENCES Rang );
+						   NomRang VARCHAR(20) NOT NULL REFERENCES Rang,
+                           CONSTRAINT PK_Utilisateur PRIMARY KEY (Pseudo, AdresseMail) );
 
-CREATE TABLE Message ( IdMessage INTEGER PRIMARY KEY,
-					   DateMessage Date NOT NULL,
-					   Contenu VARCHAR(1000) NOT NULL,
-					   QualiteMsg FLOAT NOT NULL,
-				       Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur,
-					   IdSujet INTEGER NOT NULL REFERENCES Sujet);
+CREATE TABLE Section ( NomSection VARCHAR(30) PRIMARY KEY,
+					   PopulariteSection FLOAT NOT NULL,
+					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur);
+
+CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
+						 PopulariteCategorie FLOAT NOT NULL,
+						 NomSection VARCHAR(30) NOT NULL REFERENCES Section);
 
 CREATE TABLE Sujet ( IdSujet INTEGER PRIMARY KEY,
 					 NomSujet VARCHAR(50) NOT NULL,
@@ -38,26 +43,23 @@ CREATE TABLE Sujet ( IdSujet INTEGER PRIMARY KEY,
                      NomCategorie VARCHAR(30) NOT NULL REFERENCES Categorie,
 				     Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur );
 
-CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
-						 PopulariteCategorie FLOAT NOT NULL,
-						 NomSection VARCHAR(30) NOT NULL REFERENCES Section);
-
-CREATE TABLE Section ( NomSection VARCHAR(30) PRIMARY KEY,
-					   PopulariteSection FLOAT NOT NULL,
-					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur);
-
-CREATE TABLE Rang ( NomRang DomRang PRIMARY KEY,
-                    PallierAcces FLOAT NOT NULL);
+CREATE TABLE Message ( IdMessage INTEGER PRIMARY KEY,
+					   DateMessage Date NOT NULL,
+					   Contenu VARCHAR(1000) NOT NULL,
+					   QualiteMsg FLOAT NOT NULL,
+				       Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur,
+					   IdSujet INTEGER NOT NULL REFERENCES Sujet);
 
 CREATE TABLE Support ( IdSupport INTEGER PRIMARY KEY,
 					   SystemeExploitation OS,
 					   NavigateurInternet WebBrowser,
 					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur);					   
 
-CREATE TABLE Statistiques ( DateStat DATE PRIMARY KEY,
-                            TrancheHoraire Heures PRIMARY KEY,
+CREATE TABLE Statistiques ( DateStat DATE,
+                            TrancheHoraire Heures,
                             NbConnec INTEGER,
-                            NbMsgPoste INTEGER);
+                            NbMsgPoste INTEGER,
+                            CONSTRAINT PK_Statistiques PRIMARY KEY (DateStat, TrancheHoraire));
 
 CREATE TABLE OffreRecrutement ( IdAnnonce INTEGER PRIMARY KEY,
                                 DateAnnonce DATE NOT NULL,
@@ -77,12 +79,14 @@ CREATE TABLE MsgPrive ( IdMP INTEGER PRIMARY KEY,
 
 CREATE TABLE Programmation ( LangageProg Langage PRIMARY KEY);
 
-CREATE TABLE UtilisateurProgrammation ( Pseudo VARCHAR(20) PRIMARY KEY REFERENCES Utilisateur,
-                                        LangageProg Langage PRIMARY KEY REFERENCES Programmation,
+CREATE TABLE UtilisateurProgrammation ( Pseudo VARCHAR(20) REFERENCES Utilisateur,
+                                        LangageProg Langage REFERENCES Programmation,
                                         NiveauProg Niveau,
-                                        DispoRct BOOLEAN);
+                                        DispoRct BOOLEAN,
+                                        CONSTRAINT PK_UtilisateurProgrammation PRIMARY KEY (Pseudo, LangageProg));
 
-CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER PRIMARY KEY REFERENCES OffreRecrutement,
-                                            LangageProg Langage PRIMARY KEY REFERENCES Programmation,
-                                            NiveauDemande Niveau);
+CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER REFERENCES OffreRecrutement,
+                                            LangageProg Langage REFERENCES Programmation,
+                                            NiveauDemande Niveau,
+                                            CONSTRAINT PK_OffreRecrutementProgrammation PRIMARY KEY (IdAnnonce, LangageProg));
 
