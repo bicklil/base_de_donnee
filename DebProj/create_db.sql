@@ -73,8 +73,8 @@ CREATE TABLE MsgPrive ( IdMP INTEGER PRIMARY KEY,
                         DateMP DATE NOT NULL,
                         ContenuMP VARCHAR(1000) NOT NULL,
                         EtatMP BOOLEAN NOT NULL,
-                        PseudoEnvoi VARCHAR(20) NOT NULL REFERENCES Utilisateur.Pseudo,
-                        PseudoRecoit VARCHAR(20) NOT NULL REFERENCES Utilisateur.Pseudo);
+                        PseudoEnvoi VARCHAR(20) NOT NULL REFERENCES Utilisateur,
+                        PseudoRecoit VARCHAR(20) NOT NULL REFERENCES Utilisateur);
 
 CREATE TABLE Programmation ( LangageProg Langage PRIMARY KEY);
 
