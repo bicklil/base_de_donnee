@@ -30,7 +30,7 @@ CREATE TABLE Utilisateur ( Pseudo VARCHAR(20),
 
 CREATE TABLE Section ( NomSection VARCHAR(30) PRIMARY KEY,
 					   PopulariteSection FLOAT NOT NULL,
-					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur);
+					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur.Pseudo);
 
 CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
 						 PopulariteCategorie FLOAT NOT NULL,
