@@ -29,7 +29,7 @@ CREATE TABLE Utilisateur ( Pseudo VARCHAR(20) PRIMARY KEY,
 
 CREATE TABLE Section ( NomSection VARCHAR(30) PRIMARY KEY,
 					   PopulariteSection FLOAT NOT NULL,
-					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
+					   Pseudo VARCHAR(20) REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
 						 PopulariteCategorie FLOAT NOT NULL,
@@ -66,8 +66,7 @@ CREATE TABLE OffreRecrutement ( IdAnnonce INTEGER PRIMARY KEY,
                                 TypeAnnonce Annonce,
                                 TypeContrat Contrat,
                                 MsgAnnonce VARCHAR(1000) NOT NULL,
-                                Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,
-                                AdresseMail VARCHAR(50) NOT NULL REFERENCES Utilisateur on DELETE cascade);
+                                Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE MsgPrive ( IdMP INTEGER PRIMARY KEY,
                         DateMP DATE NOT NULL,
