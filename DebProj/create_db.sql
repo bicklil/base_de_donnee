@@ -88,3 +88,5 @@ CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER REFERENCES OffreRe
                                             NiveauDemande Niveau,
                                             CONSTRAINT PK_OffreRecrutementProgrammation PRIMARY KEY (IdAnnonce, LangageProg));
 
+\i keke_sql.sql
+\i sql_jc.sql
