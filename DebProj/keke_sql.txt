@@ -6,14 +6,33 @@ AS $$
         RETURN old;
     else
         UPDATE Utilisateur
-        SET IntituleStatus = 'Moderateur'
+        SET IntituleStatus = 'Moderateur';
         RETURN new;
     END IF;
     END;
 $$ language plpgsql;
 
-CREATE TRIGGER
+CREATE TRIGGER is_there_a_moderator_already
     BEFORE UPDATE
     ON SECTION
     FOR EACH ROW
     execute procedure is_there_a_moderator_already();
+
+
+CREATE OR REPLACE function date_offre_valide()
+RETURNS TRIGGER
+AS $$
+    BEGIN
+    if DateButoire > DateAnnonce
+        return new;
+    else
+        return old;
+    END IF;
+    END;
+$$ language plpgsql;
+
+CREATE TRIGGER date_offre_valide
+    BEFORE INSERT
+    ON OffreRecrutement
+    FOR EACH ROW
+    execute procedure date_offre_valide();

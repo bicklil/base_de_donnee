@@ -66,8 +66,7 @@ CREATE TABLE OffreRecrutement ( IdAnnonce INTEGER PRIMARY KEY,
                                 TypeAnnonce Annonce,
                                 TypeContrat Contrat,
                                 MsgAnnonce VARCHAR(1000) NOT NULL,
-                                Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,
-                                AdresseMail VARCHAR(50) NOT NULL REFERENCES Utilisateur on DELETE cascade);
+                                Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE MsgPrive ( IdMP INTEGER PRIMARY KEY,
                         DateMP DATE NOT NULL,
