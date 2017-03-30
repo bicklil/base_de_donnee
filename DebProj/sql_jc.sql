@@ -22,7 +22,7 @@ as $$
 	begin
 	update Utilisateur
 	set NbMessage = NbMessage + 1
-	where pseudo = new.pseudo;
+	where Pseudo = new.Pseudo;
 	return new;
 	end;
 $$ language plpgsql;
@@ -40,14 +40,14 @@ create or replace function update_stat_nb_message_heure()
 	declare heure integer;
 	declare jour date;
 	begin
-		select extract(hour from localtime) as heure;
+		heure := (select extract(hour from localtime));
 		perform  DateStat from Statistiques where DateStat=current_date and heure = TrancheHoraire;
 		if not found then
 			insert into Statistiques
 				values (current_date,heure,0,0);
 		end if;
 		update Statistiques
-			set NbMsgPostes = NbMsgPostes + 1
+			set NbMsgPoste = NbMsgPoste + 1
 			where current_date = DateStat
 			and heure = TrancheHoraire;
 
@@ -61,3 +61,28 @@ create trigger update_stat_nb_message_heure
 	on Message
 	for each row
 	execute procedure update_stat_nb_message_heure();
+
+create or replace function update_rang()
+	returns trigger
+	as $$
+	declare NbMes integer;
+	declare fromage DomRang;
+	begin
+
+		NbMes := (select NbMessage from Utilisateur where pseudo = old.pseudo) ;
+		fromage := (select NomRang from rang
+								where PallierAcces = (select max(PallierAcces) from rang
+											            		where PallierAcces <= NbMes));
+
+
+		update Utilisateur
+			set NomRang = fromage
+			where pseudo = old.pseudo;
+		return new;
+	end;
+	$$ language plpgsql;
+
+create trigger update_rang
+	after update of NbMessage on Utilisateur
+	for each row
+	execute procedure update_rang();
