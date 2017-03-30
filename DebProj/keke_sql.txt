@@ -1,0 +1,19 @@
+CREATE OR REPLACE function is_there_a_moderator_already()
+RETURNS TRIGGER
+AS $$
+	BEGIN 
+    if old.Pseudo is not null then
+        RETURN old;
+    else
+        UPDATE Utilisateur
+        SET IntituleStatus = 'Moderateur'
+        RETURN new;
+    END IF;
+    END;
+$$ language plpgsql;
+
+CREATE TRIGGER
+    BEFORE UPDATE
+    ON SECTION
+    FOR EACH ROW
+    execute procedure is_there_a_moderator_already();

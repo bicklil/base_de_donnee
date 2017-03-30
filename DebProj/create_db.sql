@@ -29,7 +29,7 @@ CREATE TABLE Utilisateur ( Pseudo VARCHAR(20) PRIMARY KEY,
 
 CREATE TABLE Section ( NomSection VARCHAR(30) PRIMARY KEY,
 					   PopulariteSection FLOAT NOT NULL,
-					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
+					   Pseudo VARCHAR(20) REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
 						 PopulariteCategorie FLOAT NOT NULL,
