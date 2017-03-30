@@ -1,3 +1,5 @@
+\i clean_db.sql
+
 CREATE SCHEMA Eforum;
 SET search_path TO Eforum, public;
 
@@ -90,3 +92,4 @@ CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER REFERENCES OffreRe
 
 \i keke_sql.sql
 \i sql_jc.sql
+\i fill_db.sql
