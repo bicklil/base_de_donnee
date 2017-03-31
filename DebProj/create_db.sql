@@ -88,3 +88,6 @@ CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER REFERENCES OffreRe
                                             LangageProg Langage REFERENCES Programmation on DELETE cascade,
                                             NiveauDemande Niveau,
                                             CONSTRAINT PK_OffreRecrutementProgrammation PRIMARY KEY (IdAnnonce, LangageProg));
+
+CREATE TABLE UtilisateurOffreRecrutement ( IdAnnonce INTEGER REFERENCES OffreRecrutement on DELETE cascade,
+                                           Pseudo VARCHAR(20) REFERENCES Utilisateur on DELETE cascade );

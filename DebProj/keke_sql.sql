@@ -61,8 +61,24 @@ CREATE TRIGGER are_you_a_recrutor
     execute procedure are_you_a_recrutor();
 
 
+CREATE OR REPLACE function demande_rct_valide()
+RETURNS TRIGGER
+AS $$
+    DECLARE Date_limite date := (SELECT DateButoire FROM OffreRecrutement O WHERE O.IdAnnonce = new.IdAnnonce);
+    BEGIN
+        if current_date > Date_limite then
+            return old;
+        else
+            return new;
+        END IF;
+    END;
+$$ language plpgsql;
 
-
+CREATE TRIGGER demande_rct_valide
+    BEFORE INSERT
+    ON UtilisateurOffreRecrutement
+    FOR EACH ROW
+    execute procedure demande_rct_valide();
 
 
 
