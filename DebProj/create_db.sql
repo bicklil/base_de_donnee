@@ -1,4 +1,3 @@
-\i clean_db.sql
 
 CREATE SCHEMA Eforum;
 SET search_path TO Eforum, public;
@@ -54,7 +53,7 @@ CREATE TABLE Message ( IdMessage INTEGER PRIMARY KEY,
 CREATE TABLE Support ( IdSupport INTEGER PRIMARY KEY,
 					   SystemeExploitation OS,
 					   NavigateurInternet WebBrowser,
-					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);					   
+					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE Statistiques ( DateStat DATE,
                             TrancheHoraire Heures,
@@ -89,7 +88,3 @@ CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER REFERENCES OffreRe
                                             LangageProg Langage REFERENCES Programmation on DELETE cascade,
                                             NiveauDemande Niveau,
                                             CONSTRAINT PK_OffreRecrutementProgrammation PRIMARY KEY (IdAnnonce, LangageProg));
-
-\i keke_sql.sql
-\i sql_jc.sql
-\i fill_db.sql
