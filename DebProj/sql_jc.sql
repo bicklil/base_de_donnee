@@ -74,7 +74,6 @@ create or replace function update_rang()
 								where PallierAcces = (select max(PallierAcces) from rang
 											            		where PallierAcces <= NbMes));
 
-
 		update Utilisateur
 			set NomRang = fromage
 			where pseudo = old.pseudo;
@@ -86,3 +85,29 @@ create trigger update_rang
 	after update of NbMessage on Utilisateur
 	for each row
 	execute procedure update_rang();
+
+create or replace function update_connexion()
+	returns trigger
+	as $$
+	declare heure INTEGER;
+	begin
+	heure := (select extract(hour from localtime));
+	perform  DateStat from Statistiques where DateStat=current_date and heure = TrancheHoraire;
+	if not found then
+		insert into Statistiques
+		values (current_date,heure,0,0);
+	end if;
+	update Statistiques
+		set NbConnec = NbConnec + 1
+		where current_date = DateStat
+		and heure = TrancheHoraire;
+
+	return new;
+
+	end;
+	$$ language plpgsql;
+
+create trigger update_connexion
+	after update of DateDernierCo on Utilisateur
+	for each row
+	execute procedure update_connexion();
