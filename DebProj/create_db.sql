@@ -1,6 +1,6 @@
 
 CREATE SCHEMA Eforum;
-SET search_path TO Eforum, public;
+SET search_path TO Eforum;
 
 
 CREATE DOMAIN Status AS VARCHAR(20) CHECK (VALUE IN ('Administrateur', 'Moderateur', 'Lambda', 'UtilisateurSupprime', 'Recruteur'));
