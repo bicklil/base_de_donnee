@@ -2,7 +2,7 @@ import os
 import psycopg2
 import flask
 
-app = flask.flask(__name__)
+app = flask.Flask(__name__)
 app.config.from_object(__name__)
 
 # Load default config and override config from an environment variable
@@ -41,24 +41,51 @@ def close_db(error):
 
 @app.route('/')
 def show_entries():
+    tab_donne = {}
     db = get_db()
     cur = db.cursor()
     cur.execute("SET search_path TO Eforum;")
     cur.execute("select relname from pg_class\
                 where relkind='r' and relname !~ '^(pg_|sql_)';")
     entries = cur.fetchall()
-    return flask.render_template('show_entries.html', entries=entries)
+    for entry in entries:
+        cur.execute("select * from "+entry[0])
+        tab_donne[entry[0]] = cur.fetchall()
+    return flask.render_template('show_entries.html', entries=tab_donne.keys(), tab_donne=tab_donne)
 
 
 @app.route('/add', methods=['POST'])
 def add_entry():
     if not flask.session.get('logged_in'):
         flask.abort(401)
-    db = get_db()
+    """db = get_db()
     cur = db.cursor()
     cur.execute("SET search_path TO Eforum;")
     cur.execute('insert into entries (title, text) values (?, ?)',
                 [flask.request.form['title'], flask.request.form['text']])
-    cur.commit()
+    cur.commit()"""
     flask.flash('New entry was successfully posted')
-    return flask.redirect(url_for('show_entries'))
+    return flask.redirect(flask.url_for('show_entries'))
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if flask.request.method == 'POST':
+        if flask.request.form['username'] != app.config['USERNAME']:
+            error = 'Invalid username'
+        elif flask.request.form['password'] != app.config['PASSWORD']:
+            error = 'Invalid password'
+        else:
+            flask.session['logged_in'] = True
+            flask.flash('You were logged in')
+            return flask.redirect(flask.url_for('show_entries'))
+    return flask.render_template('login.html', error=error)
+
+
+@app.route('/logout')
+def logout():
+    flask.session.pop('logged_in', None)
+    flask.flash('You were logged out')
+    return flask.redirect(flask.url_for('show_entries'))
+app.run()
