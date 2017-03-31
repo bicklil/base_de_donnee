@@ -1,5 +1,4 @@
-insert into rang values ('Bronzos',0);
-insert into rang values ('Kevin',2);
+insert into rang values ('Nooblard',0),('Bronzos',2),('Kevin',5);
 insert into utilisateur values ('kiki','lol@lol','2003-07-01','M','toulon','kikou',0,0,'2003-07-01','Lambda','Kevin');
 insert into section values ('section1',0,null);
 insert into categorie values ('categorie1',0,'section1');
