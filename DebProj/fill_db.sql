@@ -8,6 +8,5 @@ insert into sujet values (0,'hihi','2003-05-05',0,'categorie1','kiki');
 insert into Message values(0,'2003-05-05','hihi',0,'kiki',0);
 
 insert into OffreRecrutement values (1, '2017-03-30', '2017-04-15', ' ', 'CDI', 'rct dj cm lvl 150 min passe vite', 'kou');
-insert into OffreRecrutement values (2, '2017-03-15', '2017-03-30', ' ', 'CDD', 'rct dé sexe f & m pour tué le karalamoure', 'kou');
+insert into OffreRecrutement values (2, '2017-03-15', '2017-03-30', ' ', 'CDD', 'rct de sexe f et m pour tue le karalamoure', 'kou');
 insert into UtilisateurOffreRecrutement values (1,'kiki'), (2,'kiki');
-
