@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
+<a href="..">retour</a>
+<a href="/">acceuil</a>
   {% if session.logged_in %}
     <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
       <dl>
@@ -14,7 +16,7 @@
   <ul class=categorie>
   <li><h2>{{ categorie }}</h2>
     {% for sujet in tab_donne %}
-      <a href="./{{categorie}}/{{ sujet[0] }}">{{sujet[0]}}<br>
+      <a href="./{{categorie}}/{{ sujet[0] }}/1">{{sujet[1]}}<br>
     {% else %}
       pas de donnee
     {% endfor %}

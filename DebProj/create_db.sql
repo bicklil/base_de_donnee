@@ -24,7 +24,7 @@ CREATE TABLE Utilisateur ( Pseudo VARCHAR(20) PRIMARY KEY,
 						   Etude VARCHAR(30),
 						   NbMessage INTEGER NOT NULL,
 						   MoyQualiteMsg FLOAT NOT NULL,
-						   DateDernierCo DATE,
+						   DateDernierCo timestamp,
 						   IntituleStatus Status,
 						   NomRang VARCHAR(20) NOT NULL REFERENCES Rang on DELETE cascade);
 
@@ -38,13 +38,13 @@ CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
 
 CREATE TABLE Sujet ( IdSujet SERIAL PRIMARY KEY,
 					 NomSujet VARCHAR(50) NOT NULL,
-					 DateCreationSujet DATE NOT NULL,
+					 DateCreationSujet timestamp NOT NULL,
 					 PopulariteSujet FLOAT NOT NULL,
                      NomCategorie VARCHAR(30) NOT NULL REFERENCES Categorie on DELETE cascade,
 				     Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE Message ( IdMessage SERIAL PRIMARY KEY ,
-					   DateMessage Date NOT NULL,
+					   DateMessage timestamp NOT NULL,
 					   Contenu VARCHAR(1000) NOT NULL,
 					   QualiteMsg FLOAT NOT NULL,
 				       Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,

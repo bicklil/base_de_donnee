@@ -68,7 +68,7 @@ def show_categorie(section):
         tab_donne = cur.fetchall()
         return flask.render_template('show_categorie.html', section=section, tab_donne=tab_donne)
     else:
-        return flask.render_template('erreur.html', type_erreur="nexists",\
+        return flask.render_template('erreur.html', type_erreur="nexists",
                                      pages=(section))
 
 
@@ -82,14 +82,48 @@ def show_sujet(section, categorie):
                 AND NomCategorie='"+categorie+"'")
     existe = cur.fetchall()
     if len(existe) != 0:
-        cur.execute("SELECT NomSujet FROM Sujet\
+        cur.execute("SELECT idsujet, NomSujet FROM Sujet\
                     WHERE NomCategorie='"+categorie+"'")
         tab_donne = cur.fetchall()
-        return flask.render_template('show_sujet.html', categorie=categorie,\
-                                    tab_donne=tab_donne)
+        return flask.render_template('show_sujet.html', categorie=categorie,
+                                     tab_donne=tab_donne)
     else:
-        return flask.render_template('erreur.html', type_erreur="nexists",\
-                                    pages=(section, categorie))
+        return flask.render_template('erreur.html', type_erreur="nexists",
+                                     pages=(section, categorie))
+
+
+@app.route('/<section>/<categorie>/<sujet>/<int:page>')
+def show_message(section, categorie, sujet, page):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SET search_path TO Eforum;")
+    cur.execute("SELECT Idsujet FROM sujet S, Categorie C \
+                WHERE C.NomSection='"+section+"'\
+                AND S.NomCategorie='"+categorie+"'\
+                AND S.NomCategorie=C.NomCategorie\
+                AND S.Idsujet='"+sujet+"'")
+    existe = cur.fetchall()
+    if len(existe) != 0:
+        cur.execute("SELECT * FROM message\
+                    WHERE Idsujet='"+sujet+"'\
+                    order by datemessage desc\
+                    limit 10 offset "+str((page-1)*10))
+        tab_donne = cur.fetchall()
+        if page > 1:
+            precedent = page - 1
+        else:
+            precedent = 0
+        if len(tab_donne) == 10:
+            suivant = page + 1
+        else:
+            suivant = 0
+        return flask.render_template('show_message.html', sujet=sujet,
+                                     section=section, categorie=categorie,
+                                     messages=tab_donne, suivant=suivant,
+                                     precedent=precedent)
+    else:
+        return flask.render_template('erreur.html', type_erreur="nexists",
+                                     pages=(section, categorie))
 
 
 @app.route('/add', methods=['POST'])

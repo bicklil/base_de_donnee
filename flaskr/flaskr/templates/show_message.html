@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<a href="..">retour</a>
+<a href="/{{section}}/{{categorie}}">retour</a>
 <a href="/">acceuil</a>
   {% if session.logged_in %}
     <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
@@ -13,12 +13,19 @@
       </dl>
     </form>
   {% endif %}
-  <ul class=section>
-  <li><h2>{{ section }}</h2>
-    {% for categorie in tab_donne %}
-      <a href="{{section}}/{{categorie[0]}}">{{categorie[0]}}</a><br>
-    {% else %}
-      pas de donnee
-    {% endfor %}
+  <ul class=messages>
+  {% for msg in messages %}
+    {{msg[2]}} {{msg[1]}}<br>
+  {% endfor %}
+  </ul>
+  <ul class=suivant>
+    {%if suivant  != 0%}
+    <a href="../{{sujet}}/{{suivant}}">pages suivantes</a>
+    {%endif%}
+  </ul>
+  <ul class=precedent>
+    {%if precedent  != 0%}
+    <a href="../{{sujet}}/{{precedent}}">pages precedente</a>
+    {%endif%}
   </ul>
 {% endblock %}
