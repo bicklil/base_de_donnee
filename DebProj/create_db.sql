@@ -36,21 +36,21 @@ CREATE TABLE Categorie ( NomCategorie VARCHAR(30) PRIMARY KEY,
 						 PopulariteCategorie FLOAT NOT NULL,
 						 NomSection VARCHAR(30) NOT NULL REFERENCES Section on DELETE cascade);
 
-CREATE TABLE Sujet ( IdSujet INTEGER PRIMARY KEY,
+CREATE TABLE Sujet ( IdSujet SERIAL PRIMARY KEY,
 					 NomSujet VARCHAR(50) NOT NULL,
 					 DateCreationSujet DATE NOT NULL,
 					 PopulariteSujet FLOAT NOT NULL,
                      NomCategorie VARCHAR(30) NOT NULL REFERENCES Categorie on DELETE cascade,
 				     Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
-CREATE TABLE Message ( IdMessage INTEGER PRIMARY KEY,
+CREATE TABLE Message ( IdMessage SERIAL PRIMARY KEY ,
 					   DateMessage Date NOT NULL,
 					   Contenu VARCHAR(1000) NOT NULL,
 					   QualiteMsg FLOAT NOT NULL,
 				       Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,
-					   IdSujet INTEGER NOT NULL REFERENCES Sujet on DELETE cascade);
+					   IdSujet SERIAL NOT NULL REFERENCES Sujet on DELETE cascade);
 
-CREATE TABLE Support ( IdSupport INTEGER PRIMARY KEY,
+CREATE TABLE Support ( IdSupport SERIAL PRIMARY KEY ,
 					   SystemeExploitation OS,
 					   NavigateurInternet WebBrowser,
 					   Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
@@ -61,7 +61,7 @@ CREATE TABLE Statistiques ( DateStat DATE,
                             NbMsgPoste INTEGER,
                             CONSTRAINT PK_Statistiques PRIMARY KEY (DateStat, TrancheHoraire));
 
-CREATE TABLE OffreRecrutement ( IdAnnonce INTEGER PRIMARY KEY,
+CREATE TABLE OffreRecrutement ( IdAnnonce SERIAL PRIMARY KEY ,
                                 DateAnnonce DATE NOT NULL,
                                 DateButoire DATE NOT NULL,
                                 TypeAnnonce Annonce,
@@ -69,7 +69,7 @@ CREATE TABLE OffreRecrutement ( IdAnnonce INTEGER PRIMARY KEY,
                                 MsgAnnonce VARCHAR(1000) NOT NULL,
                                 Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
-CREATE TABLE MsgPrive ( IdMP INTEGER PRIMARY KEY,
+CREATE TABLE MsgPrive ( IdMP SERIAL PRIMARY KEY ,
                         DateMP DATE NOT NULL,
                         ContenuMP VARCHAR(1000) NOT NULL,
                         EtatMP BOOLEAN NOT NULL,
@@ -84,10 +84,10 @@ CREATE TABLE UtilisateurProgrammation ( Pseudo VARCHAR(20) REFERENCES Utilisateu
                                         DispoRct BOOLEAN,
                                         CONSTRAINT PK_UtilisateurProgrammation PRIMARY KEY (Pseudo, LangageProg));
 
-CREATE TABLE OffreRecrutementProgrammation( IdAnnonce INTEGER REFERENCES OffreRecrutement on DELETE cascade,
+CREATE TABLE OffreRecrutementProgrammation( IdAnnonce SERIAL REFERENCES OffreRecrutement on DELETE cascade,
                                             LangageProg Langage REFERENCES Programmation on DELETE cascade,
                                             NiveauDemande Niveau,
                                             CONSTRAINT PK_OffreRecrutementProgrammation PRIMARY KEY (IdAnnonce, LangageProg));
 
-CREATE TABLE UtilisateurOffreRecrutement ( IdAnnonce INTEGER REFERENCES OffreRecrutement on DELETE cascade,
+CREATE TABLE UtilisateurOffreRecrutement ( IdAnnonce SERIAL REFERENCES OffreRecrutement on DELETE cascade,
                                            Pseudo VARCHAR(20) REFERENCES Utilisateur on DELETE cascade );
