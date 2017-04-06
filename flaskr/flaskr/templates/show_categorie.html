@@ -14,7 +14,7 @@
   <ul class=section>
   <li><h2>{{ section }}</h2>
     {% for categorie in tab_donne %}
-      {{ categorie[0] }}<br>
+      <a href="{{section}}/{{categorie[0]}}">{{categorie[0]}}</a><br>
     {% else %}
       pas de donnee
     {% endfor %}

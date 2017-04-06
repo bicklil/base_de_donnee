@@ -66,7 +66,7 @@ def show_categorie(section):
         cur.execute("SELECT NomCategorie FROM Categorie\
                     WHERE NomSection='"+section+"'")
         tab_donne = cur.fetchall()
-        return flask.render_template('show_categorie.html', entries=section,                                     tab_donne=tab_donne)
+        return flask.render_template('show_categorie.html', section=section, tab_donne=tab_donne)
     else:
         return flask.render_template('erreur.html', type_erreur="nexists",\
                                      pages=(section))
@@ -85,7 +85,7 @@ def show_sujet(section, categorie):
         cur.execute("SELECT NomSujet FROM Sujet\
                     WHERE NomCategorie='"+categorie+"'")
         tab_donne = cur.fetchall()
-        return flask.render_template('show_sujet.html', entries=categorie,\
+        return flask.render_template('show_sujet.html', categorie=categorie,\
                                     tab_donne=tab_donne)
     else:
         return flask.render_template('erreur.html', type_erreur="nexists",\
