@@ -51,7 +51,6 @@ def show_section():
         cur.execute("SELECT NomCategorie FROM Categorie\
                     WHERE NomSection ='"+entry[0]+"'")
         tab_donne[entry[0]] = cur.fetchall()
-        print(tab_donne)
     return flask.render_template('show_section.html', entries=tab_donne.keys(), tab_donne=tab_donne)
 
 
