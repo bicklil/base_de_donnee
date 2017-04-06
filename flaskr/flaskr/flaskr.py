@@ -40,18 +40,19 @@ def close_db(error):
 
 
 @app.route('/')
-def show_entries():
+def show_section():
     tab_donne = {}
     db = get_db()
     cur = db.cursor()
     cur.execute("SET search_path TO Eforum;")
-    cur.execute("select relname from pg_class\
-                where relkind='r' and relname !~ '^(pg_|sql_)';")
+    cur.execute("SELECT NomSection FROM Section")
     entries = cur.fetchall()
     for entry in entries:
-        cur.execute("select * from "+entry[0])
+        cur.execute("SELECT NomCategorie FROM Categorie\
+                    WHERE NomSection ='"+entry[0]+"'")
         tab_donne[entry[0]] = cur.fetchall()
-    return flask.render_template('show_entries.html', entries=tab_donne.keys(), tab_donne=tab_donne)
+        print(tab_donne)
+    return flask.render_template('show_section.html', entries=tab_donne.keys(), tab_donne=tab_donne)
 
 
 @app.route('/add', methods=['POST'])
@@ -65,7 +66,7 @@ def add_entry():
                 [flask.request.form['title'], flask.request.form['text']])
     cur.commit()"""
     flask.flash('New entry was successfully posted')
-    return flask.redirect(flask.url_for('show_entries'))
+    return flask.redirect(flask.url_for('show_section'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -79,7 +80,7 @@ def login():
         else:
             flask.session['logged_in'] = True
             flask.flash('You were logged in')
-            return flask.redirect(flask.url_for('show_entries'))
+            return flask.redirect(flask.url_for('show_section'))
     return flask.render_template('login.html', error=error)
 
 
@@ -87,5 +88,5 @@ def login():
 def logout():
     flask.session.pop('logged_in', None)
     flask.flash('You were logged out')
-    return flask.redirect(flask.url_for('show_entries'))
+    return flask.redirect(flask.url_for('show_section'))
 app.run()
