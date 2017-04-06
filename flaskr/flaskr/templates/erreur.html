@@ -14,12 +14,12 @@
   <ul class=erreur>
      {% if type_erreur is equalto "nexists"  %}
        la page
-       {% if string(pages) is sameas false%}
-         {% for page in pages%}
-           {{page}}/
-         {% endfor %}
+       {% if string(pages) %}
+         {{pages}}
         {%else%}
-          {{pages}}
+          {% for page in pages%}
+            {{page}}/
+          {% endfor %}
         {%endif%}
         n'existe pas
       {%endif%}
