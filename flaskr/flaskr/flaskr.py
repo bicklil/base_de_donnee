@@ -54,6 +54,44 @@ def show_section():
     return flask.render_template('show_section.html', entries=tab_donne.keys(), tab_donne=tab_donne)
 
 
+@app.route('/<section>')
+def show_categorie(section):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SET search_path TO Eforum;")
+    cur.execute("SELECT NomSection FROM Section WHERE\
+                NomSection='"+section+"'")
+    existe = cur.fetchall()
+    if len(existe) != 0:
+        cur.execute("SELECT NomCategorie FROM Categorie\
+                    WHERE NomSection='"+section+"'")
+        tab_donne = cur.fetchall()
+        return flask.render_template('show_categorie.html', entries=section,                                     tab_donne=tab_donne)
+    else:
+        return flask.render_template('erreur.html', type_erreur="nexists",\
+                                     pages=(section))
+
+
+@app.route('/<section>/<categorie>')
+def show_sujet(section, categorie):
+    db = get_db()
+    cur = db.cursor()
+    cur.execute("SET search_path TO Eforum;")
+    cur.execute("SELECT NomCategorie FROM Categorie\
+                WHERE NomSection='"+section+"'\
+                AND NomCategorie='"+categorie+"'")
+    existe = cur.fetchall()
+    if len(existe) != 0:
+        cur.execute("SELECT NomSujet FROM Sujet\
+                    WHERE NomCategorie='"+categorie+"'")
+        tab_donne = cur.fetchall()
+        return flask.render_template('show_sujet.html', entries=categorie,\
+                                    tab_donne=tab_donne)
+    else:
+        return flask.render_template('erreur.html', type_erreur="nexists",\
+                                    pages=(section, categorie))
+
+
 @app.route('/add', methods=['POST'])
 def add_entry():
     if not flask.session.get('logged_in'):
