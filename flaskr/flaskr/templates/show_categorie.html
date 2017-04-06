@@ -11,16 +11,12 @@
       </dl>
     </form>
   {% endif %}
-  <ul class=secion>
-  {% for section in entries %}
-    <li><h2>{{ entry }}</h2>
-      {% for categorie in tab_donne[section] %}
-        {{ donne }}<br>
-      {% else %}
-        pas de donnee
-      {% endfor %}
-  {% else %}
-    <li><em>Unbelievable.  No entries here so far</em>
-  {% endfor %}
+  <ul class=section>
+  <li><h2>{{ section }}</h2>
+    {% for categorie in tab_donne[section] %}
+      {{ categorie[0] }}<br>
+    {% else %}
+      pas de donnee
+    {% endfor %}
   </ul>
 {% endblock %}
