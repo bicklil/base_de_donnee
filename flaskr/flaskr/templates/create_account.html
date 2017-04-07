@@ -5,18 +5,18 @@
     <form action="{{ url_for('create_account') }}" method=post>
         <dl>
             <dt>Pseudo*:
-            <dd><input type=text name=pseudo value="20 char max">
+            <dd><input type=text name=pseudo value={{session.pseudo}}>
             <dt>Mail*:
-            <dd><input type=text name=mail>
+            <dd><input type=text name=mail value={{session.mail}}>
             <dt>Date de naissance*:
-            <dd><input type=date name=age value="AAAA-MM-JJ">
+            <dd><input type=date name=age value={{session.age}}>
             <dt>Sexe*:
-            <dd><input type=text name=sexe value="M / F">
+            <dd><input type=text name=sexe value={{session.sexe}}>
             <dt>Ville:
-            <dd><input type=text name=ville>
+            <dd><input type=text name=ville value={{session.ville}}>
             <dt>Etude:
-            <dd><input type=text name=etude>
+            <dd><input type=text name=etude value={{session.etude}}>
         </dl>
     </form>
     <i>Les champs marqués d'une étoile sont obligatoire</i>
-{ % endblock % }
+{% endblock %}
