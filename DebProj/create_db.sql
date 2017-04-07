@@ -40,8 +40,8 @@ CREATE TABLE Sujet ( IdSujet SERIAL PRIMARY KEY,
 					 NomSujet VARCHAR(50) NOT NULL,
 					 DateCreationSujet timestamp NOT NULL,
 					 PopulariteSujet FLOAT NOT NULL,
-                     NomCategorie VARCHAR(30) NOT NULL REFERENCES Categorie on DELETE cascade,
-				     Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
+           NomCategorie VARCHAR(30) NOT NULL REFERENCES Categorie on DELETE cascade,
+			     Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade);
 
 CREATE TABLE Message ( IdMessage SERIAL PRIMARY KEY ,
 					   DateMessage timestamp NOT NULL,

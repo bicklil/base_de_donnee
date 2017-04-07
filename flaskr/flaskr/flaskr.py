@@ -86,7 +86,7 @@ def show_categorie(section):
                                      pages=(section))
 
 
-@app.route('/<section>/<categorie>')
+@app.route('/<section>/<categorie>', methods=['GET', 'POST'])
 def show_sujet(section, categorie):
     cur = get_cur()
     cur.execute("SELECT NomCategorie FROM Categorie\
@@ -94,11 +94,19 @@ def show_sujet(section, categorie):
                 AND NomCategorie='"+categorie+"'")
     existe = cur.fetchall()
     if len(existe) != 0:
+        if flask.request.method == 'POST':
+            contenu = flask.request.form['sujet_input']
+            date_post = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            pseudal = flask.session['pseudo']
+            cur.execute("INSERT INTO sujet (Idsujet, nomsujet, DateCreationSujet,\
+                         PopulariteSujet, NomCategorie, pseudo) values\
+                        (DEFAULT,'"+contenu+"','"+date_post+"'\
+                        ,0,'"+categorie+"','"+pseudal+"')")
         cur.execute("SELECT idsujet, NomSujet FROM Sujet\
                     WHERE NomCategorie='"+categorie+"'")
         tab_donne = cur.fetchall()
         return flask.render_template('show_sujet.html', categorie=categorie,
-                                     tab_donne=tab_donne)
+                                     tab_donne=tab_donne, section=section)
     else:
         return flask.render_template('erreur.html', type_erreur="nexists",
                                      pages=(section, categorie))
@@ -139,7 +147,7 @@ def show_message(section, categorie, sujet, page):
                                      section=section, categorie=categorie,
                                      messages=tab_donne, suivant=suivant,
                                      precedent=precedent, page=page)
-        
+
     else:
         return flask.render_template('erreur.html', type_erreur="nexists",
                                      pages=(section, categorie))
