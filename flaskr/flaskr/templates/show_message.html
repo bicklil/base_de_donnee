@@ -21,6 +21,14 @@
   <ul class=suivant>
     {%if suivant  != 0%}
     <a href="../{{sujet}}/{{suivant}}">pages suivantes</a>
+    {%else%}
+    <form action="{{ url_for('login') }}" method=post>
+      <dl>
+        <dt>reponse:
+        <dd><input type=text name=message_input>
+        <dd><input type=submit value=Repondre>
+      </dl>
+    </form>
     {%endif%}
   </ul>
   <ul class=precedent>

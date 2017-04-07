@@ -106,7 +106,7 @@ def show_message(section, categorie, sujet, page):
     if len(existe) != 0:
         cur.execute("SELECT * FROM message\
                     WHERE Idsujet='"+sujet+"'\
-                    order by datemessage desc\
+                    order by datemessage\
                     limit 10 offset "+str((page-1)*10))
         tab_donne = cur.fetchall()
         if page > 1:
