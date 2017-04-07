@@ -47,7 +47,7 @@ CREATE TABLE Message ( IdMessage SERIAL PRIMARY KEY ,
 					   DateMessage timestamp NOT NULL,
 					   Contenu VARCHAR(1000) NOT NULL,
 					   QualiteMsg FLOAT NOT NULL,
-				       Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,
+				     Pseudo VARCHAR(20) NOT NULL REFERENCES Utilisateur on DELETE cascade,
 					   IdSujet SERIAL NOT NULL REFERENCES Sujet on DELETE cascade);
 
 CREATE TABLE Support ( IdSupport SERIAL PRIMARY KEY ,

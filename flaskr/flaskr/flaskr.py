@@ -3,7 +3,8 @@ import psycopg2
 import flask
 import datetime
 import re
-#datetime.datetime.strptime('2012-07-22 16:19:00.539570', '%Y-%m-%d %H:%M:%S.%f')
+# datetime.datetime.strptime('2012-07-22 16:19:00.539570',
+# '%Y-%m-%d %H:%M:%S.%f')
 app = flask.Flask(__name__)
 app.config.from_object(__name__)
 
@@ -50,6 +51,22 @@ def get_cur():
     return cur
 
 
+@app.route('/destruction_msg', methods=["GET", "POST"])
+def destruction_msg():
+    idmessage = flask.request.args.get("idmessage")
+    print(idmessage)
+    section = flask.request.args.get("section")
+    categorie = flask.request.args.get("categorie")
+    sujet = flask.request.args.get("sujet")
+    page = flask.request.args.get("page")
+    cur = get_cur()
+    cur.execute("delete from message where idmessage=({})".format(idmessage))
+    flask.flash("message supprimee")
+    return flask.redirect(flask.url_for('show_message', sujet=sujet,
+                                        section=section, categorie=categorie,
+                                        page=page))
+
+
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""
@@ -59,6 +76,8 @@ def close_db(error):
 
 @app.route('/')
 def show_section():
+    if "pseudo" not in flask.session:
+        flask.session["pseudo"] = ""
     tab_donne = {}
     cur = get_cur()
     cur.execute("SELECT NomSection FROM Section")
@@ -67,7 +86,8 @@ def show_section():
         cur.execute("SELECT NomCategorie FROM Categorie\
                     WHERE NomSection ='"+entry[0]+"'")
         tab_donne[entry[0]] = cur.fetchall()
-    return flask.render_template('show_section.html', entries=tab_donne.keys(), tab_donne=tab_donne)
+    return flask.render_template('show_section.html', entries=tab_donne.keys(),
+                                 tab_donne=tab_donne)
 
 
 @app.route('/<section>')
@@ -80,7 +100,8 @@ def show_categorie(section):
         cur.execute("SELECT NomCategorie FROM Categorie\
                     WHERE NomSection='"+section+"'")
         tab_donne = cur.fetchall()
-        return flask.render_template('show_categorie.html', section=section, tab_donne=tab_donne)
+        return flask.render_template('show_categorie.html', section=section,
+                                     tab_donne=tab_donne)
     else:
         return flask.render_template('erreur.html', type_erreur="nexists",
                                      pages=(section))
@@ -112,7 +133,8 @@ def show_sujet(section, categorie):
                                      pages=(section, categorie))
 
 
-@app.route('/<section>/<categorie>/<sujet>/<int:page>', methods=['GET', 'POST'])
+@app.route('/<section>/<categorie>/<sujet>/<int:page>',
+           methods=['GET', 'POST'])
 def show_message(section, categorie, sujet, page):
     cur = get_cur()
     cur.execute("SELECT Idsujet FROM sujet S, Categorie C \
@@ -126,6 +148,7 @@ def show_message(section, categorie, sujet, page):
             contenu = flask.request.form['message_input']
             date_post = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             pseudal = flask.session['pseudo']
+            print(pseudal)
             cur.execute("INSERT INTO Message (IdMessage, DateMessage, Contenu,\
                          QualiteMsg, Pseudo, IdSujet) values\
                         (DEFAULT,'"+date_post+"','"+contenu+"'\
@@ -246,4 +269,5 @@ def logout():
     flask.session.pop('logged_in', None)
     flask.flash('You were logged out')
     return flask.redirect(flask.url_for('show_section'))
+
 app.run()

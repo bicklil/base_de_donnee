@@ -4,7 +4,19 @@
 <a href="/">acceuil</a>
   <ul class=messages>
   {% for msg in messages %}
-    {{msg[2]}} {{msg[1]}}<br>
+    {{msg[2]}} {{msg[1]}}
+	{%if session.logged_in %}
+  {%if session.status in ["Moderateur","Administrateur"]}
+  <form action="{{ url_for('destruction_msg',idmessage=msg[0],section=section, categorie=categorie, sujet=sujet, page=page)}}" method=post>
+    <input type=submit value=destroy>
+  </form>
+	{%elif msg[4] == session.pseudo%}
+	<form action="{{ url_for('destruction_msg',idmessage=msg[0],section=section, categorie=categorie, sujet=sujet, page=page)}}" method=post>
+		<input type=submit value=destroy>
+	</form>
+	{%endif%}
+	{%endif%}
+	<br>
   {% endfor %}
   </ul>
   <ul class=suivant>
