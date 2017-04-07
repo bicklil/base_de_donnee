@@ -1,7 +1,9 @@
 import os
 import psycopg2
 import flask
-
+import datetime
+import re
+#datetime.datetime.strptime('2012-07-22 16:19:00.539570', '%Y-%m-%d %H:%M:%S.%f')
 app = flask.Flask(__name__)
 app.config.from_object(__name__)
 
@@ -13,6 +15,14 @@ app.config.update(dict(
     PASSWORD='admin123'
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
+
+
+def validate_date(date_text):
+    try:
+        datetime.datetime.strptime(date_text, '%Y-%m-%d')
+        return True
+    except ValueError:
+        return False
 
 
 def connect_db():
@@ -32,6 +42,14 @@ def get_db():
     return flask.g.psql_db
 
 
+def get_cur():
+    db = get_db()
+    db.autocommit = True
+    cur = db.cursor()
+    cur.execute("SET search_path TO Eforum;")
+    return cur
+
+
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""
@@ -42,9 +60,7 @@ def close_db(error):
 @app.route('/')
 def show_section():
     tab_donne = {}
-    db = get_db()
-    cur = db.cursor()
-    cur.execute("SET search_path TO Eforum;")
+    cur = get_cur()
     cur.execute("SELECT NomSection FROM Section")
     entries = cur.fetchall()
     for entry in entries:
@@ -56,9 +72,7 @@ def show_section():
 
 @app.route('/<section>')
 def show_categorie(section):
-    db = get_db()
-    cur = db.cursor()
-    cur.execute("SET search_path TO Eforum;")
+    cur = get_cur()
     cur.execute("SELECT NomSection FROM Section WHERE\
                 NomSection='"+section+"'")
     existe = cur.fetchall()
@@ -74,9 +88,7 @@ def show_categorie(section):
 
 @app.route('/<section>/<categorie>')
 def show_sujet(section, categorie):
-    db = get_db()
-    cur = db.cursor()
-    cur.execute("SET search_path TO Eforum;")
+    cur = get_cur()
     cur.execute("SELECT NomCategorie FROM Categorie\
                 WHERE NomSection='"+section+"'\
                 AND NomCategorie='"+categorie+"'")
@@ -94,9 +106,7 @@ def show_sujet(section, categorie):
 
 @app.route('/<section>/<categorie>/<sujet>/<int:page>')
 def show_message(section, categorie, sujet, page):
-    db = get_db()
-    cur = db.cursor()
-    cur.execute("SET search_path TO Eforum;")
+    cur = get_cur()
     cur.execute("SELECT Idsujet FROM sujet S, Categorie C \
                 WHERE C.NomSection='"+section+"'\
                 AND S.NomCategorie='"+categorie+"'\
@@ -144,15 +154,73 @@ def add_entry():
 def login():
     error = None
     if flask.request.method == 'POST':
-        if flask.request.form['username'] != app.config['USERNAME']:
+        liste_pseudo = []
+        cur = get_cur()
+        cur.execute("SELECT pseudo from utilisateur")
+        liste_pseudo_temp = cur.fetchall()
+        for temp in liste_pseudo_temp:
+            liste_pseudo.append(temp[0])
+
+        if flask.request.form['username'] not in liste_pseudo:
             error = 'Invalid username'
-        elif flask.request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid password'
         else:
             flask.session['logged_in'] = True
             flask.flash('You were logged in')
             return flask.redirect(flask.url_for('show_section'))
     return flask.render_template('login.html', error=error)
+
+
+@app.route('/create_account', methods=['GET', 'POST'])
+def create_account():
+    error = None
+    if flask.request.method == 'POST':
+        flask.session['pseudo'] = flask.request.form['pseudo']
+        flask.session['mail'] = flask.request.form['mail']
+        flask.session['sexe'] = flask.request.form['sexe']
+        flask.session['age'] = flask.request.form['age']
+        flask.session['ville'] = flask.request.form['ville']
+        flask.session['etude'] = flask.request.form['etude']
+        liste_pseudo = []
+        liste_mail = []
+        cur = get_cur()
+        cur.execute("SELECT pseudo,adressemail from utilisateur")
+        liste_pseudo_temp = cur.fetchall()
+        for temp in liste_pseudo_temp:
+            liste_pseudo.append(temp[0])
+            liste_mail.append(temp[1])
+
+        if flask.request.form['pseudo'] in liste_pseudo:
+            error = 'pseudo deja pris'
+        elif flask.request.form['mail'] in liste_mail:
+            error = 'mail deja pris'
+        elif flask.request.form['mail'] == "":
+            error = "mail ne peut pas etre vide"
+        elif not re.match(r"[^@]+@[^@]+\.[^@]+", flask.request.form['mail']):
+            error = "mail non valide"
+        elif not validate_date(flask.session['age']):
+            error = 'date incorect'
+        elif flask.request.form['sexe'] not in ['M', 'm', 'f', 'F']:
+            error = 'invalid format '
+        else:
+            cur.execute("insert into utilisateur values\
+            ('"+flask.session['pseudo']+"',\
+            '"+flask.session['mail']+"',\
+            '"+flask.session['age']+"',\
+            '"+flask.session['sexe']+"',\
+            '"+flask.session['ville']+"',\
+            '"+flask.session['etude']+"',\
+            0,0,'1960-01-01 00:00:00','Lambda','Nooblard')")
+            flask.session['logged_in'] = True
+            flask.flash('Compte cree')
+            return flask.redirect(flask.url_for('show_section'))
+    else:
+        flask.session['pseudo'] = ""
+        flask.session['mail'] = ""
+        flask.session['sexe'] = "M/F"
+        flask.session['age'] = "AAAA-MM-JJ"
+        flask.session['ville'] = ""
+        flask.session['etude'] = ""
+    return flask.render_template('create_account.html', error=error, )
 
 
 @app.route('/logout')
