@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Creation Compte</h2>
+{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+    <form action="{{ url_for('create_account') }}" method=post>
+        <dl>
+            <dt>Pseudo*:
+            <dd><input type=text name=pseudo>
+            <dt>Mail*:
+            <dd><input type=text name=mail>
+            <dt>Date de naissance*:
+            <dd><input type=date name=age>
+            <dt>Sexe*:
+            <dd><input type=text name=sexe>
+            <dt>Ville:
+            <dd><input type=text name=ville>
+            <dt>Etude:
+            <dd><input type=text name=etude>
+        </dl>
+    </form>
+    <i>Les champs marqués d'une étoile sont obligatoire</i>
+{ % endblock % }
