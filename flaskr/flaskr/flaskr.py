@@ -104,7 +104,7 @@ def show_sujet(section, categorie):
                                      pages=(section, categorie))
 
 
-@app.route('/<section>/<categorie>/<sujet>/<int:page>')
+@app.route('/<section>/<categorie>/<sujet>/<int:page>', methods=['GET', 'POST'])
 def show_message(section, categorie, sujet, page):
     cur = get_cur()
     cur.execute("SELECT Idsujet FROM sujet S, Categorie C \
@@ -114,6 +114,14 @@ def show_message(section, categorie, sujet, page):
                 AND S.Idsujet='"+sujet+"'")
     existe = cur.fetchall()
     if len(existe) != 0:
+        if flask.request.method == 'POST':
+            contenu = flask.request.form['message_input']
+            date_post = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            pseudal = flask.session['pseudo']
+            cur.execute("INSERT INTO Message (IdMessage, DateMessage, Contenu,\
+                         QualiteMsg, Pseudo, IdSujet) values\
+                        (DEFAULT,'"+date_post+"','"+contenu+"'\
+                        ,0,'"+pseudal+"','"+sujet+"')")
         cur.execute("SELECT * FROM message\
                     WHERE Idsujet='"+sujet+"'\
                     order by datemessage\
@@ -130,7 +138,8 @@ def show_message(section, categorie, sujet, page):
         return flask.render_template('show_message.html', sujet=sujet,
                                      section=section, categorie=categorie,
                                      messages=tab_donne, suivant=suivant,
-                                     precedent=precedent)
+                                     precedent=precedent, page=page)
+        
     else:
         return flask.render_template('erreur.html', type_erreur="nexists",
                                      pages=(section, categorie))
@@ -166,6 +175,7 @@ def login():
         else:
             flask.session['logged_in'] = True
             flask.flash('You were logged in')
+            flask.session['pseudo'] = flask.request.form['username']
             return flask.redirect(flask.url_for('show_section'))
     return flask.render_template('login.html', error=error)
 

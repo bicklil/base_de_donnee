@@ -12,7 +12,7 @@
     <a href="../{{sujet}}/{{suivant}}">pages suivantes</a>
     {%else%}
       {% if session.logged_in %}
-      <form action="{{ url_for('login') }}" method=post>
+      <form action="{{ url_for('show_message',section=section, categorie=categorie, sujet=sujet, page=page) }}" method=post>
         <dl>
           <dt>reponse:
           <dd><input type=text name=message_input>
