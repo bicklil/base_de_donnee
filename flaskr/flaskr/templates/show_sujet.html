@@ -2,6 +2,15 @@
 {% block body %}
 <a href="..">retour</a>
 <a href="/">acceuil</a>
+{% if session.logged_in %}
+  <form action="{{ url_for('show_sujet',section=section,categorie=categorie) }}" method=post class=add-entry>
+    <dl>
+      <dt>nom de sujet:
+      <dd><input type=text size=30 name=sujet_input>
+      <dd><input type=submit value="creer sujet">
+    </dl>
+  </form>
+{% endif %}
   <ul class=categorie>
   <li><h2>{{ categorie }}</h2>
     {% for sujet in tab_donne %}
