@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<a href="/offres">retour</a>
+<a href="/">acceuil</a>
+
+<ul class=offres_content>
+{% for msg in donnee %}
+    {{msg[0]}}
+{% endfor %}
+</ul>
+{% endblock %}

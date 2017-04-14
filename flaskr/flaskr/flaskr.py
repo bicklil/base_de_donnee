@@ -90,6 +90,24 @@ def show_section():
                                  tab_donne=tab_donne)
 
 
+@app.route('/offres')
+def show_offres():
+    cur = get_cur()
+    cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat\
+                 FROM OffreRecrutement")
+    entries = cur.fetchall()
+    return flask.render_template('show_offres.html', entries=entries)
+
+
+@app.route('/offres/<int:numoffre>')
+def offres_content(numoffre):
+    cur = get_cur()
+    cur.execute("SELECT MsgAnnonce FROM OffreRecrutement WHERE\
+                 IdAnnonce='"+str(numoffre)+"'")
+    donnee = cur.fetchall()
+    return flask.render_template('offres_content.html', donnee=donnee)
+
+
 @app.route('/<section>')
 def show_categorie(section):
     cur = get_cur()
