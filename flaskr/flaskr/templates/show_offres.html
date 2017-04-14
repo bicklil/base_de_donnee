@@ -4,8 +4,25 @@
 <ul class=offres>
 {% for offres in entries %}
     <li><h2><a href="/offres/{{offres[0]}}">{{offres[1],offres[2]}}<a></h2>
-{% else %}
-    <li><em>Pas d'offres actuellement.</em>
+    {% else %}
+        <li><em>Pas d'offres actuellement.</em>
 {% endfor %}
+
+    {%if session.logged_in %}
+        {{session.status[0][0]}}
+        {%if session.status[0][0] == "Recruteur" %}
+            <form action="{{url_for('show_offres')}}" method=post>
+                <dl>
+                    <dt>Nouvelle Offre:
+                    <dd><input type=text name=annonce value="type annonce">
+                    <dd><input type=text name=contrat value="type contrat">
+                    <dd><input type=date name=datefin value="date butoire">
+                    <dd><input type=text name=cont value="message">
+                    <dd><input type=submit value="Poster">
+                </dl>
+            </form>
+        {% endif %}
+    {% endif %}
+
 </ul>
 {% endblock %}
