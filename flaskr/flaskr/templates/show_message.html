@@ -6,7 +6,7 @@
   {% for msg in messages %}
     {{msg[2]}} {{msg[1]}}
 	{%if session.logged_in %}
-  {%if session.status in ["Moderateur","Administrateur"]}
+  {%if session.status in ["Moderateur","Administrateur"]%}
   <form action="{{ url_for('destruction_msg',idmessage=msg[0],section=section, categorie=categorie, sujet=sujet, page=page)}}" method=post>
     <input type=submit value=destroy>
   </form>

@@ -102,7 +102,7 @@ def show_offres():
 @app.route('/offres/<int:numoffre>')
 def offres_content(numoffre):
     cur = get_cur()
-    cur.execute("SELECT MsgAnnonce FROM OffreRecrutement WHERE\
+    cur.execute("SELECT * FROM OffreRecrutement WHERE\
                  IdAnnonce='"+str(numoffre)+"'")
     donnee = cur.fetchall()
     return flask.render_template('offres_content.html', donnee=donnee)
