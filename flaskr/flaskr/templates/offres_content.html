@@ -6,8 +6,8 @@
 <ul class=offres_content>
 {% for boumboum in donnee %}
     <h2>{{ boumboum[3],boumboum[4] }}</h2>
+    <h3>Auteur: {{boumboum[6]}}, valable du {{boumboum[1]}} au {{boumboum[2]}}</h3><br>
     {{boumboum[5]}}
-    <br><br>Auteur: {{boumboum[6]}}, valable du {{boumboum[1]}} au {{boumboum[2]}}
 {% endfor %}
 </ul>
 {% endblock %}
