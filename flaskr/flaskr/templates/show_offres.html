@@ -9,8 +9,8 @@
 {% endfor %}
 
     {%if session.logged_in %}
-        {{session.status[0][0]}}
-        {%if session.status[0][0] == "Recruteur" %}
+        {{session.status}}
+        {%if session.status[0] == "Recruteur" %}
             <form action="{{url_for('show_offres')}}" method=post>
                 <dl>
                     <dt>Nouvelle Offre:
