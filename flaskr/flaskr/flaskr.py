@@ -28,7 +28,8 @@ def validate_date(date_text):
 
 def connect_db():
     """Connects to the specific database."""
-    rv = psycopg2.connect(host="sinfo1")
+    # rv = psycopg2.connect(host="sinfo1")
+    rv = psycopg2.connect(dbname="jc", user="jc")
     # curseur = rv.cursor()
     # curseur.execute("SET search_path TO Eforum;")
     return rv
@@ -104,8 +105,8 @@ def show_offres():
         pseudo = flask.session['pseudo']
         date = datetime.datetime.now().strftime('%Y-%m-%d')
         cur.execute("INSERT INTO OffreRecrutement values\
-                    (DEFAULT,'"+date+"','"+datefin+"','"+annonce+"','"\
-                    +contrat+"','"+contenu+"','"+pseudo+"')")
+                    (DEFAULT,'"+date+"','"+datefin+"','"+annonce+"','"
+                    + contrat+"','"+contenu+"','"+pseudo+"')")
         entries = cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat\
                     FROM OffreRecrutement")
         return flask.render_template('show_offres.html', entries=entries)
@@ -238,6 +239,9 @@ def login():
             flask.session['logged_in'] = True
             flask.flash('You were logged in')
             flask.session['pseudo'] = flask.request.form['username']
+            cur.execute("SELECT IntituleStatus from utilisateur\
+                        where pseudo = '" + flask.session["pseudo"] + "'")
+            flask.session['status'] = cur.fetchall()[0]
             return flask.redirect(flask.url_for('show_section'))
     return flask.render_template('login.html', error=error)
 
@@ -252,6 +256,7 @@ def create_account():
         flask.session['age'] = flask.request.form['age']
         flask.session['ville'] = flask.request.form['ville']
         flask.session['etude'] = flask.request.form['etude']
+        flask.session['status'] = "Lambda"
         liste_pseudo = []
         liste_mail = []
         cur = get_cur()
@@ -300,5 +305,6 @@ def logout():
     flask.session.pop('logged_in', None)
     flask.flash('You were logged out')
     return flask.redirect(flask.url_for('show_section'))
+
 
 app.run()
