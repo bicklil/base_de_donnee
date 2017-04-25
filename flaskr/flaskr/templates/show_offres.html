@@ -6,7 +6,8 @@
    {%if date < offres[3]|string %}
     <li><h2><a href="/offres/{{offres[0]}}">{{offres[1]}} {{offres[2]}}<a></h2>
     {% else %}
-    <li><h2><a href="/offres/{{offres[0]}}">{{offres[1]}} {{offres[2]}} Pas dispo<a></h2>
+    <li><h2><a href="/offres/{{offres[0]}}">{{offres[1]}} {{offres[2]}}<a></h2>
+    <h4 class=fini> Offre Terminee </h4>
     {% endif %}
     {% else %}
         <li><em>Pas d'offres actuellement.</em>
@@ -17,9 +18,18 @@
             <form action="{{url_for('show_offres')}}" method=post>
                 <dl>
                     <dt>Nouvelle Offre:
-                    <dd><input type=text name=annonce value="type annonce">
-                    <dd><input type=text name=contrat value="type contrat">
-                    <dd><input type=date name=datefin value="date butoire">
+                    <dd><select name=annonce>
+                          <option value="web">web</option>
+                          <option value="logiciel">logiciel</option>
+                          <option value="admin">admin</option>
+                          <option value="designer">designer</option>
+                        </select>
+                    <dd><select name=contrat>
+                          <option value="CDD">CDD</option>
+                          <option value="CDI">CDI</option>
+                          <option value="STAGE">STAGE</option>
+                        </select>
+                    <dd><input type=date name=datefi value="AAAA-MM-JJ">
                     <dd><input type=text name=cont value="message">
                     <dd><input type=submit value="Poster">
                 </dl>
