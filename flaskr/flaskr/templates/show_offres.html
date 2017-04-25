@@ -4,9 +4,9 @@
 <ul class=offres>
 {% for offres in entries %}
    {%if date < offres[3]|string %}
-    <li><h2><a href="/offres/{{offres[0]}}">{{offres[1]}}{{offres[2]}}<a></h2>
+    <li><h2><a href="/offres/{{offres[0]}}">{{offres[1]}} {{offres[2]}}<a></h2>
     {% else %}
-    <li><h2><a href="/offres/{{offres[0]}}">{{offres[1]}}{{offres[2]}} Pas dispo<a></h2>
+    <li><h2><a href="/offres/{{offres[0]}}">{{offres[1]}} {{offres[2]}} Pas dispo<a></h2>
     {% endif %}
     {% else %}
         <li><em>Pas d'offres actuellement.</em>

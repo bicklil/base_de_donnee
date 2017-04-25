@@ -111,10 +111,6 @@ def show_section():
 @app.route('/offres', methods=['GET', 'POST'])
 def show_offres():
     cur = get_cur()
-    cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat, Datebutoire\
-                 FROM OffreRecrutement")
-    entries = cur.fetchall()
-    date_now = datetime.datetime.now().strftime('%Y-%m-%d')
     if flask.request.method == 'POST':
         annonce = flask.request.form['annonce']
         contrat = flask.request.form['contrat']
@@ -125,10 +121,10 @@ def show_offres():
         cur.execute("INSERT INTO OffreRecrutement values\
                     (DEFAULT,'"+date+"','"+datefin+"','"+annonce+"','"
                     + contrat+"','"+contenu+"','"+pseudo+"')")
-        cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat\
-                    FROM OffreRecrutement")
-        entries = cur.fetchall()
-        print(entries)
+    cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat, Datebutoire\
+                 FROM OffreRecrutement")
+    entries = cur.fetchall()
+    date_now = datetime.datetime.now().strftime('%Y-%m-%d')
     return flask.render_template('show_offres.html', entries=entries, date=date_now)
 
 
