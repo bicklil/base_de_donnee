@@ -3,13 +3,12 @@
 <a href="/">acceuil</a>
 <ul class=offres>
 {% for offres in entries %}
-    <li><h2><a href="/offres/{{offres[0]}}">{{offres[1],offres[2]}}<a></h2>
+    <li><h2><a href="/offres/{{offres[0]}}">{{offres[1]}}{{offres[2]}}<a></h2>
     {% else %}
         <li><em>Pas d'offres actuellement.</em>
 {% endfor %}
 
     {%if session.logged_in %}
-        {{session.status}}
         {%if session.status[0] == "Recruteur" %}
             <form action="{{url_for('show_offres')}}" method=post>
                 <dl>

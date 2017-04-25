@@ -4,15 +4,15 @@
 <a href="/">acceuil</a>
   <ul class=messages>
   {% for msg in messages %}
-    {{msg[2]}} {{msg[1]}}
+    {{msg[2]}} <h4>Par {{msg[4]}} le {{msg[1]}}</h4>
 	{%if session.logged_in %}
   {%if session.status in ["Moderateur","Administrateur"]%}
-  <form action="{{ url_for('destruction_msg',idmessage=msg[0],section=section, categorie=categorie, sujet=sujet, page=page)}}" method=post>
-    <input type=submit value=destroy>
+  <form action="{{ url_for('destruction_msg',idmessage=msg[0],section=section, categorie=categorie, sujet=sujet, page=page)}}" method=post class=la_croix>
+        <input type="image" src="/static/la_croix.png" width="20" height="20">
   </form>
 	{%elif msg[4] == session.pseudo%}
-	<form action="{{ url_for('destruction_msg',idmessage=msg[0],section=section, categorie=categorie, sujet=sujet, page=page)}}" method=post>
-		<input type=submit value=destroy>
+	<form action="{{ url_for('destruction_msg',idmessage=msg[0],section=section, categorie=categorie, sujet=sujet, page=page)}}" method=post class=la_croix>
+        <input type="image" src="/static/la_croix.png" width="20" height="20">
 	</form>
 	{%endif%}
 	{%endif%}
