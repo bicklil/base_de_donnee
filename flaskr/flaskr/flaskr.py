@@ -334,16 +334,30 @@ def logout():
     return flask.redirect(flask.url_for('show_section'))
 
 
-@app.route('/messageprive')
+@app.route('/messageprive', methods=['GET', 'POST'])
 def messageprive():
+    other = flask.request.args.get("other")
 
-    return flask.render_template('mp.html')
+    return flask.render_template('mp.html', other=other)
+
+
+@app.route('/message_envoie')
+def message_envoie():
+    other = flask.request.args.get("other")
+    contenu = flask.request.form["message"]
+    pseudo = flask.session["pseudo"]
+    date_envoie = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    cur = get_cur()
+    cur.execute("insert into MsgPrive (DateMp, ContenuMP, EtatMP, PseudoEnvoi, PseudoRecoit)\
+                values ({},'{}','false','{}','{}')".format(date_envoie, contenu, flask.session["pseudo"], other))
+    flask.flash("message envoyé")
+    return flask.render_template('msgbox.html')
 
 
 @app.route('/msgbox')
 def msgbox():
-
     return flask.render_template('msgbox.html')
+
 
 @app.route('/profil')
 def profil():
@@ -352,5 +366,5 @@ def profil():
     cur.execute("SELECT * from utilisateur\
     where pseudo = ('{}')".format(pseudal))
     entrie = cur.fetchall()[0]
-    return flask.render_template('profil.html', entrie=entrie, pseudo=pseudal)
+    return flask.render_template('profil.html', entrie=entrie)
 app.run()
