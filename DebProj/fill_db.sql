@@ -19,6 +19,6 @@ insert into Message values(DEFAULT,'2003-05-05 09:01:00','hihi',0,'kiki',1);
 insert into Message values(DEFAULT,'2003-05-05 10:01:00','hihi',0,'kiki',1);
 insert into Message values(DEFAULT,'2003-05-05 11:01:00','hihi',0,'kiki',1);
 insert into Message values(DEFAULT,'2003-05-05 11:01:00','hihi',0,'kiki',1);
-insert into OffreRecrutement values (DEFAULT, '2017-03-30', '2017-04-30', ' ', 'CDI', 'rct dj cm lvl 150 min passe vite', 'kou');
-insert into OffreRecrutement values (DEFAULT, '2017-03-15', '2017-03-30', ' ', 'CDD', 'rct de sexe f et m pour tue le karalamoure', 'kou');
+insert into OffreRecrutement values (DEFAULT, '2017-03-30', '2017-04-30', 'web', 'CDI', 'rct dj cm lvl 150 min passe vite', 'kou');
+insert into OffreRecrutement values (DEFAULT, '2017-03-15', '2017-03-30', 'web', 'CDD', 'rct de sexe f et m pour tue le karalamoure', 'kou');
 insert into UtilisateurOffreRecrutement values (1,'kiki'), (2,'kiki');

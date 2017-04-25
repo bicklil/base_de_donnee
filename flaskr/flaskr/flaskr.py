@@ -125,8 +125,10 @@ def show_offres():
         cur.execute("INSERT INTO OffreRecrutement values\
                     (DEFAULT,'"+date+"','"+datefin+"','"+annonce+"','"
                     + contrat+"','"+contenu+"','"+pseudo+"')")
-        entries = cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat\
+        cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat\
                     FROM OffreRecrutement")
+        entries = cur.fetchall()
+        print(entries)
     return flask.render_template('show_offres.html', entries=entries, date=date_now)
 
 
