@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <a href="/">accueil</a>
+    {% if session.logged_in %}
+       <br> C'est tes messages
+
+    {% endif %}
+
+
+
+{% endblock %}
