@@ -133,6 +133,7 @@ def show_offres():
 @app.route('/offres/<int:numoffre>')
 def offres_content(numoffre):
     cur = get_cur()
+    date_now = datetime.datetime.now().strftime('%Y-%m-%d')
     cur.execute("SELECT * FROM OffreRecrutement WHERE\
                  IdAnnonce='"+str(numoffre)+"'")
     donnee = cur.fetchall()[0]
@@ -140,13 +141,11 @@ def offres_content(numoffre):
                 where IdAnnonce='"+str(numoffre)+"'\
                 and pseudo ='"+flask.session["pseudo"]+"'")
     tempo = cur.fetchall()
-    print(len(tempo))
-    print(tempo)
     if len(tempo) == 0:
         postule = True
     else:
         postule = False
-    return flask.render_template('offres_content.html', donnee=donnee, postule=postule)
+    return flask.render_template('offres_content.html', donnee=donnee, postule=postule, date=date_now)
 
 
 @app.route('/<section>')
