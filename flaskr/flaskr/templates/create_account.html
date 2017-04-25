@@ -11,7 +11,10 @@
             <dt>Date de naissance*:
             <dd><input type=date name=age value={{session.age}}>
             <dt>Sexe*:
-            <dd><input type=text name=sexe value={{session.sexe}}>
+            <dd><select name=sexe>
+                <option value="M">M</option>
+                <option value="F">F</option>
+                </select>
             <dt>Ville:
             <dd><input type=text name=ville value={{session.ville}}>
             <dt>Etude:
