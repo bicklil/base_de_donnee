@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+  <!--<a href="/offres">retour</a>-->
+  <a href="/">acceuil</a>
+  {% for inform in entrie%}
+    {{ inform }}<br>
+  {%endfor%}
+  {% if pseudo != session.pseudo%}
+    <form action="{{url_for('messageprive')}}" method=post>
+  {%endif%}
+{% endblock %}

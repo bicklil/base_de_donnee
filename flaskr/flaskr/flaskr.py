@@ -85,6 +85,7 @@ def postule():
 
     return flask.redirect(flask.url_for('offres_content', numoffre=numoffre))
 
+
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""
@@ -125,7 +126,8 @@ def show_offres():
                  FROM OffreRecrutement")
     entries = cur.fetchall()
     date_now = datetime.datetime.now().strftime('%Y-%m-%d')
-    return flask.render_template('show_offres.html', entries=entries, date=date_now)
+    return flask.render_template('show_offres.html', entries=entries,
+                                 date=date_now)
 
 
 @app.route('/offres/<int:numoffre>')
@@ -143,7 +145,8 @@ def offres_content(numoffre):
         postule = True
     else:
         postule = False
-    return flask.render_template('offres_content.html', donnee=donnee, postule=postule, date=date_now)
+    return flask.render_template('offres_content.html', donnee=donnee,
+                                 postule=postule, date=date_now)
 
 
 @app.route('/<section>')
@@ -331,4 +334,18 @@ def logout():
     return flask.redirect(flask.url_for('show_section'))
 
 
+@app.route('/messageprive')
+def messageprive():
+
+    return flask.render_template('mp.html')
+
+
+@app.route('/profil')
+def profil():
+    pseudal = flask.request.args.get("pseudo")
+    cur = get_cur()
+    cur.execute("SELECT * from utilisateur\
+    where pseudo = ('{}')".format(pseudal))
+    entrie = cur.fetchall()[0]
+    return flask.render_template('profil.html', entrie=entrie, pseudo=pseudal)
 app.run()

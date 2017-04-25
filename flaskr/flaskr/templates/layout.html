@@ -9,9 +9,10 @@
     <a href="{{ url_for('create_account') }}">create account</a>
   {% else %}
     <a href="{{ url_for('logout') }}">log out</a>
+    <a href="{{ url_for('profil',pseudo=session.pseudo) }}">mon profil</a>
     {% if request.path == "/" %}
         <a href="{{ url_for('show_offres') }}">offres recrutement</a>
-    {% endif %}    
+    {% endif %}
   {% endif %}
   </div>
   {% for message in get_flashed_messages() %}
