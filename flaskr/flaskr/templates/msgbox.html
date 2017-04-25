@@ -4,11 +4,11 @@
     {% if session.logged_in %}
         {% for mp in entries %}
             {% if mp[2] %}
-                <form action="{{url_for('lecture', lu='True', idmp=mp[5])}}",method="post">
+                <form action="{{url_for('lecture', lu='True', idmp=mp[5] ) }}",method="post">
                 <input type="submit" value="lu">
                 </form>
             {% else %}
-                <form action="{{url_for('lecture', lu='False', idmp=mp[5])}}", method="post">
+                <form action="{{url_for('lecture', lu='False', idmp=mp[5] ) }}", method="post">
                 <input type="submit" value="non lu">
                 </form>
             {% endif %}
