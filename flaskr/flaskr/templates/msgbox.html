@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
-
     <a href="/">accueil</a>
     {% if session.logged_in %}
-       <br> C'est tes messages
-
+        {% for mp in entries %}
+            {{ mp[1] }}
+            <h4>Par {{mp[3]}} le {{mp[0]}}</h4>
+        {% endfor %}
     {% endif %}
 
 

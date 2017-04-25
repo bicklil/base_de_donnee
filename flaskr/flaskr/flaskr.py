@@ -356,7 +356,11 @@ def message_envoie():
 
 @app.route('/msgbox')
 def msgbox():
-    return flask.render_template('msgbox.html')
+    cur = get_cur()
+    cur.execute("SELECT DateMP, ContenuMP, EtatMP, PseudoEnvoi, PseudoRecoit\
+                FROM MsgPrive WHERE PseudoRecoit='"+flask.session["pseudo"]+"'")
+    entries = cur.fetchall()
+    return flask.render_template('msgbox.html', entries=entries)
 
 
 @app.route('/profil')
