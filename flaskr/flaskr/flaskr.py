@@ -28,8 +28,8 @@ def validate_date(date_text):
 
 def connect_db():
     """Connects to the specific database."""
-    # rv = psycopg2.connect(host="sinfo1")
-    rv = psycopg2.connect(dbname="jc", user="jc")
+    rv = psycopg2.connect(host="sinfo1")
+    # rv = psycopg2.connect(dbname="jc", user="jc")
     # curseur = rv.cursor()
     # curseur.execute("SET search_path TO Eforum;")
     return rv

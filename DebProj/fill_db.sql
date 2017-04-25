@@ -1,6 +1,7 @@
 insert into rang values ('Nooblard',0),('Bronzos',2),('Kevin',5);
-insert into utilisateur values ('kiki','lol@lol','2003-07-01','M','toulon','kikou',0,0,'2003-07-01 00:00:00','Lambda','Kevin');
-insert into utilisateur values ('kou','lol@loazeazel','2003-07-01','M','toulon','kikou',0,0,'2003-07-01 00:00:00','Recruteur','Kevin');
+insert into utilisateur values ('kiki','lol@lol1.com','2003-07-01','M','toulon','kikou',0,0,'2003-07-01 00:00:00','Lambda','Kevin');
+insert into utilisateur values ('kou','lol@loazeazel.com','2003-07-01','M','toulon','kikou',0,0,'2003-07-01 00:00:00','Recruteur','Kevin');
+insert into utilisateur values ('kevin','lol@lol.com','1996-09-26','M','Hyeres','god',0,0,'2003-07-01 00:00:00','Administrateur','Kevin');
 insert into section values ('section1',0,null),('section2',0,null);
 insert into categorie values ('categorie1',0,'section1'),('categorie2',0,'section1'),
                              ('categorie3',0,'section2'),('categorie4',0,'section2');
