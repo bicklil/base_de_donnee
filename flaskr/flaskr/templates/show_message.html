@@ -4,7 +4,8 @@
 <a href="/">acceuil</a>
   <ul class=messages>
   {% for msg in messages %}
-    {{msg[2]}} <h4>Par {{msg[4]}} le {{msg[1]}}</h4>
+    {{msg[2]}} <h4>Par
+      <a href="{{url_for('profil',pseudo=msg[4])}}">{{msg[4]}}</a> le {{msg[1]}}</h4>
 	{%if session.logged_in %}
   {%if session.status in ["Moderateur","Administrateur"]%}
   <form action="{{ url_for('destruction_msg',idmessage=msg[0],section=section, categorie=categorie, sujet=sujet, page=page)}}" method=post class=la_croix>
