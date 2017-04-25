@@ -341,7 +341,7 @@ def messageprive():
     return flask.render_template('mp.html', other=other)
 
 
-@app.route('/message_envoie')
+@app.route('/message_envoie', methods=['GET', 'POST'])
 def message_envoie():
     other = flask.request.args.get("other")
     contenu = flask.request.form["message"]
@@ -349,9 +349,9 @@ def message_envoie():
     date_envoie = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cur = get_cur()
     cur.execute("insert into MsgPrive (DateMp, ContenuMP, EtatMP, PseudoEnvoi, PseudoRecoit)\
-                values ({},'{}','false','{}','{}')".format(date_envoie, contenu, flask.session["pseudo"], other))
+                values ('{}','{}','false','{}','{}')".format(date_envoie, contenu, flask.session["pseudo"], other))
     flask.flash("message envoyé")
-    return flask.render_template('msgbox.html')
+    return flask.redirect(flask.url_for('msgbox'))
 
 
 @app.route('/msgbox')
