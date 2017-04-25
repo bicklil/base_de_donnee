@@ -1,7 +1,14 @@
 {% extends "layout.html" %}
 {% block body %}
-  <!--<a href="/offres">retour</a>-->
   <a href="/">acceuil</a>
-
+  {% if session.logged_in %}
+  <form action="{{ url_for('message_envoie',other=other) }}" method=post>
+    <dl>
+      <dt>message privé pour {{ other }}:
+      <dd><input type=text name=message_input>
+      <dd><input type=submit value=envoyer>
+    </dl>
+  </form>
+  {%endif%}
 
 {% endblock %}
