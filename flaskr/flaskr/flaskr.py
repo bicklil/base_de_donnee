@@ -340,6 +340,11 @@ def messageprive():
     return flask.render_template('mp.html')
 
 
+@app.route('/msgbox')
+def msgbox():
+
+    return flask.render_template('msgbox.html')
+
 @app.route('/profil')
 def profil():
     pseudal = flask.request.args.get("pseudo")
