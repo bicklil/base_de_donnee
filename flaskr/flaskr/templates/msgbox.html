@@ -1,8 +1,18 @@
 {% extends "layout.html" %}
 {% block body %}
-    <a href="/">accueil</a>
+    <a href="/">accueil</a><br><br>
     {% if session.logged_in %}
         {% for mp in entries %}
+            {% if mp[2] %}
+                <form action="{{url_for('lecture', lu='True', idmp=mp[5])}}",method="post">
+                <input type="submit" value="lu">
+                </form>
+            {% else %}
+                <form action="{{url_for('lecture', lu='False', idmp=mp[5])}}", method="post">
+                <input type="submit" value="non lu">
+                </form>
+            {% endif %}
+
             {{ mp[1] }}
             <h4>Par {{mp[3]}} le {{mp[0]}}</h4>
         {% endfor %}

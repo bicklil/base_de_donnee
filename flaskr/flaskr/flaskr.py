@@ -357,10 +357,24 @@ def message_envoie():
 @app.route('/msgbox')
 def msgbox():
     cur = get_cur()
-    cur.execute("SELECT DateMP, ContenuMP, EtatMP, PseudoEnvoi, PseudoRecoit\
+    cur.execute("SELECT DateMP, ContenuMP, EtatMP, PseudoEnvoi, PseudoRecoit, IdMp\
                 FROM MsgPrive WHERE PseudoRecoit='"+flask.session["pseudo"]+"'")
     entries = cur.fetchall()
     return flask.render_template('msgbox.html', entries=entries)
+
+
+@app.route('/lecture', methods=["GET", "POST"])
+def lecture():
+    cur = get_cur()
+    lu = flask.request.args.get("lu")
+    idmp = flask.request.args.get("idmp")
+    if lu == 'False':
+        cur.execute("UPDATE MsgPrive SET EtatMP = 'True'\
+                    WHERE IdMP = {}".format(idmp))
+    else:
+        cur.execute("UPDATE MsgPrive SET EtatMP = 'False'\
+                    WHERE IdMP = {}".format(idmp))
+    return flask.redirect(flask.url_for('msgbox'))
 
 
 @app.route('/profil')
