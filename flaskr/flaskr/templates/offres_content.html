@@ -4,9 +4,9 @@
 <a href="/">acceuil</a>
 
 <ul class=offres_content>
-  <h2>{{ donnee[0][3]}}{{donnee[0][4] }}</h2>
-  <h3>Auteur: {{donnee[0][6]}}, valable du {{donnee[0][1]}} au {{donnee[0][2]}}</h3><br>
-  {{donnee[0][5]}}
+  <h2>{{ donnee[3]}}{{donnee[4] }}</h2>
+  <h3>Auteur: {{donnee[6]}}, valable du {{donnee[1]}} au {{donnee[2]}}</h3><br>
+  {{donnee[5]}}
   {%if session.logged_in %}
     {%if postule %}
     <form action="{{ url_for('postule',postule='True', numoffre=donnee[0][0])}}" method=post>

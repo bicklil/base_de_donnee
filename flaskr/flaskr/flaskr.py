@@ -111,9 +111,10 @@ def show_section():
 @app.route('/offres', methods=['GET', 'POST'])
 def show_offres():
     cur = get_cur()
-    cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat\
+    cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat, Datebutoire\
                  FROM OffreRecrutement")
     entries = cur.fetchall()
+    date_now = datetime.datetime.now().strftime('%Y-%m-%d')
     if flask.request.method == 'POST':
         annonce = flask.request.form['annonce']
         contrat = flask.request.form['contrat']
@@ -126,8 +127,7 @@ def show_offres():
                     + contrat+"','"+contenu+"','"+pseudo+"')")
         entries = cur.execute("SELECT IdAnnonce, TypeAnnonce, TypeContrat\
                     FROM OffreRecrutement")
-        return flask.render_template('show_offres.html', entries=entries)
-    return flask.render_template('show_offres.html', entries=entries)
+    return flask.render_template('show_offres.html', entries=entries, date=date_now)
 
 
 @app.route('/offres/<int:numoffre>')
@@ -135,7 +135,7 @@ def offres_content(numoffre):
     cur = get_cur()
     cur.execute("SELECT * FROM OffreRecrutement WHERE\
                  IdAnnonce='"+str(numoffre)+"'")
-    donnee = cur.fetchall()
+    donnee = cur.fetchall()[0]
     cur.execute("SELECT * from utilisateuroffrerecrutement\
                 where IdAnnonce='"+str(numoffre)+"'\
                 and pseudo ='"+flask.session["pseudo"]+"'")
