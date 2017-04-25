@@ -68,6 +68,23 @@ def destruction_msg():
                                         page=page))
 
 
+@app.route('/postule', methods=["GET", "POST"])
+def postule():
+    cur = get_cur()
+    b_postule = flask.request.args.get("postule")
+    numoffre = flask.request.args.get("numoffre")
+    if b_postule == "True":
+        flask.flash("vous avez postulé à l'annonce")
+        cur.execute("insert into utilisateuroffrerecrutement values\
+                    ({}, '{}' )".format(numoffre, flask.session["pseudo"]))
+    else:
+        flask.flash("vous avez decliné l'annonce")
+        cur.execute("delete from utilisateuroffrerecrutement\
+                    where IdAnnonce =({}) and pseudo = ('{}')\
+                    ".format(numoffre, flask.session["pseudo"]))
+
+    return flask.redirect(flask.url_for('offres_content', numoffre=numoffre))
+
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""
@@ -119,7 +136,17 @@ def offres_content(numoffre):
     cur.execute("SELECT * FROM OffreRecrutement WHERE\
                  IdAnnonce='"+str(numoffre)+"'")
     donnee = cur.fetchall()
-    return flask.render_template('offres_content.html', donnee=donnee)
+    cur.execute("SELECT * from utilisateuroffrerecrutement\
+                where IdAnnonce='"+str(numoffre)+"'\
+                and pseudo ='"+flask.session["pseudo"]+"'")
+    tempo = cur.fetchall()
+    print(len(tempo))
+    print(tempo)
+    if len(tempo) == 0:
+        postule = True
+    else:
+        postule = False
+    return flask.render_template('offres_content.html', donnee=donnee, postule=postule)
 
 
 @app.route('/<section>')

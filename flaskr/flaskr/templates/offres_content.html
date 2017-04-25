@@ -4,10 +4,19 @@
 <a href="/">acceuil</a>
 
 <ul class=offres_content>
-{% for boumboum in donnee %}
-    <h2>{{ boumboum[3]}}{{boumboum[4] }}</h2>
-    <h3>Auteur: {{boumboum[6]}}, valable du {{boumboum[1]}} au {{boumboum[2]}}</h3><br>
-    {{boumboum[5]}}
-{% endfor %}
+  <h2>{{ donnee[0][3]}}{{donnee[0][4] }}</h2>
+  <h3>Auteur: {{donnee[0][6]}}, valable du {{donnee[0][1]}} au {{donnee[0][2]}}</h3><br>
+  {{donnee[0][5]}}
+  {%if session.logged_in %}
+    {%if postule %}
+    <form action="{{ url_for('postule',postule='True', numoffre=donnee[0][0])}}" method=post>
+          <input type="submit" value="postuler" >
+    </form>
+    {%else%}
+    <form action="{{ url_for('postule',postule='False', numoffre=donnee[0][0])}}" method=post>
+          <input type="submit" value="retirer" >
+    </form>
+    {%endif%}
+  {%endif%}
 </ul>
 {% endblock %}
