@@ -28,8 +28,8 @@ def validate_date(date_text):
 
 def connect_db():
     """Connects to the specific database."""
-    rv = psycopg2.connect(host="sinfo1")
-    # rv = psycopg2.connect(dbname="jc", user="jc")
+    # rv = psycopg2.connect(host="sinfo1")
+    rv = psycopg2.connect(dbname="jc", user="jc")
     # curseur = rv.cursor()
     # curseur.execute("SET search_path TO Eforum;")
     return rv
@@ -385,4 +385,15 @@ def profil():
     where pseudo = ('{}')".format(pseudal))
     entrie = cur.fetchall()[0]
     return flask.render_template('profil.html', entrie=entrie)
-app.run()
+
+
+@app.route("/stat")
+def chart():
+    labels = ["January","February","March","April","May","June","July","August"]
+    values = [10,9,8,7,6,4,7,8]
+    colors = [ "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA","#ABCDEF", "#DDDDDD", "#ABCABC"  ]
+    return flask.render_template('stats.html', set=zip(values, labels, colors))
+
+
+if __name__ == "__main__":
+    app.run()
