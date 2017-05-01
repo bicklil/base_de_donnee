@@ -1,13 +1,35 @@
 {% extends "layout.html" %}
 {% block body %}
-  <a href="/">acceuil</a><br>
-  {% for inform in entrie%}
-    {{ inform }}<br>
-  {%endfor%}
-  {{entrie[0]}} {{session.pseudo}}
+  <a href="/">acceuil</a><br><br>
+    pseudo: {{ entrie[0] }}<br>
+    adresse: {{ entrie[1] }}<br>
+    date de naissance: {{ entrie[2] }}<br>
+    sexe : {{ entrie[3] }}<br>
+    ville: {{ entrie[4] }}<br>
+    etude: {{ entrie[5] }}<br>
+    nb messages: {{ entrie[6] }}<br>
+    note: {{ entrie[7] }}<br>
+    derniere connexion: {{ entrie[8] }}<br>
+    {% if session.status[0] in ["Administrateur","Moderateur"]%}
+    <form action="{{url_for('change_status',pseudo=entrie[0])}}" method="post">
+      <dt>status:
+      <dd><select name=status>
+          <option value="{{entrie[9]}}">{{entrie[9]}}</option>
+        {%for item in ["Lambda","Recruteur","Administrateur","Moderateur"] %}
+
+          <option value="{{item}}">{{item}}</option>
+        {%endfor%}
+          </select>
+      <dd><input type=submit value="modifier"><br>
+    {%else%}
+        status: {{ entrie[9] }}<br>
+    {% endif%}
+    rang: {{ entrie[10] }}<br>
+
   {% if entrie[0] != session.pseudo %}
     <form action="{{url_for('messageprive',other=entrie[0])}}" method=post>
       <input type=submit value="envoyer un message privée">
     </form>
   {%endif%}
+
 {% endblock %}

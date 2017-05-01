@@ -514,5 +514,17 @@ def creation_graphique(typee, forme, duree):
     return iduree, donne
 
 
+@app.route("/change_status", methods=["POST"])
+def change_status():
+    pseudo = flask.request.args.get("pseudo")
+    status = flask.request.form.get("status")
+    cur = get_cur()
+    cur.execute("UPDATE utilisateur\
+                set IntituleStatus = '{}'\
+                where pseudo = '{}'".format(status, pseudo))
+    flask.flash(" status mise a jour")
+    return flask.redirect(flask.url_for('profil', pseudo=pseudo))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
