@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+<a href="/">accueil</a><br><br>
+{% if session.status[0] == "Administrateur" %}
+ <script src="{{ url_for('static', filename='Chart.min.js') }}"></script>
+<form action="{{ url_for('stat') }}" method=post>
+    <dl>
+        <dt>type:
+        <dd><select name=type>
+          {%for item in type_i%}
+            <option value="{{item}}">{{item}}</option>
+          {%endfor%}
+            </select>
+        <dt>duree:
+        <dd><select name=duree>
+          {%for item in duree_i%}
+            <option value="{{item}}">{{item}}</option>
+          {%endfor%}
+            </select>
+        <dt>forme:
+        <dd><select name=forme>
+          {%for item in forme_i%}
+            <option value="{{item}}">{{item}}</option>
+          {%endfor%}
+            </select>
+        <dt><input type=submit value="creer">
+    </dl>
+</form>
+{% block graph%} {%endblock%}
+{%else%}
+Vous n'avez pas les droits
+{%endif%}
+{% endblock %}

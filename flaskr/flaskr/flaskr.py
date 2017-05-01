@@ -29,7 +29,7 @@ def validate_date(date_text):
 def connect_db():
     """Connects to the specific database."""
     # rv = psycopg2.connect(host="sinfo1")
-    rv = psycopg2.connect(dbname="jc", user="jc")
+    rv = psycopg2.connect(dbname="eforum", user="jc")
     # curseur = rv.cursor()
     # curseur.execute("SET search_path TO Eforum;")
     return rv
@@ -330,6 +330,7 @@ def create_account():
 @app.route('/logout')
 def logout():
     flask.session.pop('logged_in', None)
+    flask.session["status"] = ""
     flask.flash('You were logged out')
     return flask.redirect(flask.url_for('show_section'))
 
@@ -348,8 +349,10 @@ def message_envoie():
     pseudo = flask.session["pseudo"]
     date_envoie = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cur = get_cur()
-    cur.execute("insert into MsgPrive (DateMp, ContenuMP, EtatMP, PseudoEnvoi, PseudoRecoit)\
-                values ('{}','{}','false','{}','{}')".format(date_envoie, contenu, flask.session["pseudo"], other))
+    cur.execute("insert into MsgPrive (DateMp, ContenuMP, EtatMP,\
+                PseudoEnvoi, PseudoRecoit)\
+                values ('{}','{}','false','{}','{}')\
+                ".format(date_envoie, contenu, flask.session["pseudo"], other))
     flask.flash("message envoyé")
     return flask.redirect(flask.url_for('msgbox'))
 
@@ -358,7 +361,8 @@ def message_envoie():
 def msgbox():
     cur = get_cur()
     cur.execute("SELECT DateMP, ContenuMP, EtatMP, PseudoEnvoi, PseudoRecoit, IdMp\
-                FROM MsgPrive WHERE PseudoRecoit='"+flask.session["pseudo"]+"'")
+                FROM MsgPrive\
+                WHERE PseudoRecoit='"+flask.session["pseudo"]+"'")
     entries = cur.fetchall()
     return flask.render_template('msgbox.html', entries=entries)
 
@@ -387,13 +391,128 @@ def profil():
     return flask.render_template('profil.html', entrie=entrie)
 
 
-@app.route("/stat")
-def chart():
-    labels = ["January","February","March","April","May","June","July","August"]
-    values = [10,9,8,7,6,4,7,8]
-    colors = [ "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA","#ABCDEF", "#DDDDDD", "#ABCABC"  ]
-    return flask.render_template('stats.html', set=zip(values, labels, colors))
+@app.route("/stat", methods=["GET", "POST"])
+def stat():
+    type_i = ["nombre de connexion", "nombre de message"]
+    duree_i = ["aujourd'hui", "cette semaine",
+               "ce mois"]
+    forme_i = ["barre", "courbe", "circulaire"]
+    if flask.request.form.get("type") is None:
+        return flask.render_template('stat_layout.html',
+                                     forme_i=forme_i, type_i=type_i,
+                                     duree_i=duree_i)
+
+    labels, values = creation_graphique(flask.request.form.get("type"),
+                                        flask.request.form.get("forme"),
+                                        flask.request.form.get("duree"))
+    if flask.request.form.get("forme") == "circulaire":
+        colors = ["#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
+                  "#ABCDEF", "#DDDDDD", "#ABCABC", "#990066",
+                  "#CC0099", "#CCCC99", "#666699", "#0099CC",
+                  "#33FF00", "#FF9933", "#CC0000", "#336666"]
+        return flask.render_template('stat_pie.html', values=values,
+                                     forme_i=forme_i, colors=colors,
+                                     labels=labels, type_i=type_i,
+                                     duree_i=duree_i)
+    elif flask.request.form.get("forme") == "courbe":
+        return flask.render_template('stat_line.html', values=values,
+                                     forme_i=forme_i,
+                                     labels=labels, type_i=type_i,
+                                     duree_i=duree_i)
+    elif flask.request.form.get("forme") == "barre":
+        return flask.render_template('stat_bar.html', values=values,
+                                     forme_i=forme_i,
+                                     labels=labels, type_i=type_i,
+                                     duree_i=duree_i)
+
+
+@app.route("/statb")
+def chartb():
+
+    return flask.render_template('stat_bar.html', values=values, labels=labels)
+
+
+@app.route("/statp")
+def chartp():
+
+    return flask.render_template('stat_pie.html',
+                                 values=values, labels=labels, colors=colors)
+
+
+def creation_graphique(typee, forme, duree):
+    if typee == "nombre de connexion":
+        itype = "NbConnec"
+    elif typee == "nombre de message":
+        itype = "NbMsgPoste"
+
+    if duree == "aujourd'hui":
+        datelimite = datetime.datetime.now().strftime("%Y-%m-%d")
+        iduree = ["00h", "01h", "02h", "03h", "04h", "05h", "06h", "07h",
+                  "08h", "09h", "10h", "11h", "12h", "13h", "14h", "15h",
+                  "16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h"]
+    elif duree == "cette semaine":
+        temp = True
+        iduree = []
+        for i in range(6, -1, -1):
+            date_tempo = datetime.datetime.now() - datetime.timedelta(days=i)
+            if (temp):
+                datelimite = date_tempo.strftime("%Y-%m-%d")
+                temp = False
+            iduree.append(date_tempo.strftime("%Y-%m-%d"))
+    elif duree == "ce mois":
+        temp = True
+        iduree = []
+        jour = int(datetime.datetime.now().strftime("%d"))
+        for i in range(jour, -1, -1):
+            date_tempo = datetime.datetime.now() - datetime.timedelta(days=i)
+            if (temp):
+                datelimite = date_tempo.strftime("%Y-%m-%d")
+                temp = False
+            iduree.append(date_tempo.strftime("%Y-%m-%d"))
+    cur = get_cur()
+    if duree == "aujourd'hui":
+        cur.execute("SELECT TrancheHoraire, {} from Statistiques\
+                    where DateStat = '{}'\
+                    order by DateStat, TrancheHoraire\
+                    ".format(itype, datelimite))
+
+        donne_tempo = cur.fetchall()
+        tempo = 0
+        donne = []
+        for i in range(len(iduree)):
+            if i+tempo < len(donne_tempo):
+                if i == donne_tempo[i+tempo][0]:
+                    donne.append(donne_tempo[i+tempo][1])
+                else:
+                    donne.append(0)
+                    tempo = tempo - 1
+        while(len(donne) < len(iduree)):
+            donne.append(0)
+
+    else:
+        cur.execute("SELECT DateStat, sum({}) from Statistiques\
+                    where DateStat > '{}'\
+                    group by DateStat\
+                    order by DateStat".format(itype, datelimite))
+
+        donne_tempo = cur.fetchall()
+        tempo = 0
+        donne = []
+        print(donne_tempo)
+        print(iduree)
+        for i in range(len(iduree)):
+            if i+tempo < len(donne_tempo):
+                if iduree[i] == donne_tempo[i+tempo][0].strftime("%Y-%m-%d"):
+                    donne.append(donne_tempo[i+tempo][1])
+                    print(donne_tempo[i+tempo][1])
+                else:
+                    donne.append(0)
+                    tempo = tempo - 1
+        while(len(donne) < len(iduree)):
+            donne.append(0)
+
+    return iduree, donne
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
