@@ -253,23 +253,23 @@ def add_entry():
 def login():
     error = None
     if flask.request.method == 'POST':
-        liste_pseudo = []
+        pseudo = flask.request.form['username']
         cur = get_cur()
-        cur.execute("SELECT pseudo from utilisateur")
-        liste_pseudo_temp = cur.fetchall()
-        for temp in liste_pseudo_temp:
-            liste_pseudo.append(temp[0])
-
-        if flask.request.form['username'] not in liste_pseudo:
+        cur.execute("SELECT IntituleStatus from utilisateur\
+                    where pseudo = '{}'".format(pseudo))
+        answer = cur.fetchall()
+        try:
+            if answer[0][0] == "UtilisateurSupprime":
+                error = 'Utilisateur supprime'
+            else:
+                flask.session['logged_in'] = True
+                flask.flash('You were logged in')
+                flask.session['pseudo'] = flask.request.form['username']
+                flask.session['status'] = answer[0][0]
+                return flask.redirect(flask.url_for('show_section'))
+        except IndexError:
             error = 'Invalid username'
-        else:
-            flask.session['logged_in'] = True
-            flask.flash('You were logged in')
-            flask.session['pseudo'] = flask.request.form['username']
-            cur.execute("SELECT IntituleStatus from utilisateur\
-                        where pseudo = '" + flask.session["pseudo"] + "'")
-            flask.session['status'] = cur.fetchall()[0]
-            return flask.redirect(flask.url_for('show_section'))
+
     return flask.render_template('login.html', error=error)
 
 
@@ -524,6 +524,15 @@ def change_status():
                 where pseudo = '{}'".format(status, pseudo))
     flask.flash(" status mise a jour")
     return flask.redirect(flask.url_for('profil', pseudo=pseudo))
+
+
+@app.route("/suppression", methods=["POST"])
+def suppression():
+    pseudo = flask.session["pseudo"]
+    cur = get_cur()
+    cur.execute("UPDATE utilisateur set IntituleStatus = 'UtilisateurSupprime'\
+                where pseudo = '{}'".format(pseudo))
+    return flask.redirect(flask.url_for('logout'))
 
 
 if __name__ == "__main__":

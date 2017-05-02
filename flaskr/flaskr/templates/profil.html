@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 {% block body %}
+{% if (entrie[9] == "UtilisateurSupprime") and
+      (session.status != "Administrateur")%}
+  Utilisateur Supprime
+{% else %}
   <a href="/">acceuil</a><br><br>
     pseudo: {{ entrie[0] }}<br>
     adresse: {{ entrie[1] }}<br>
@@ -10,7 +14,7 @@
     nb messages: {{ entrie[6] }}<br>
     note: {{ entrie[7] }}<br>
     derniere connexion: {{ entrie[8] }}<br>
-    {% if session.status[0] in ["Administrateur","Moderateur"]%}
+    {% if session.status in ["Administrateur","Moderateur"]%}
     <form action="{{url_for('change_status',pseudo=entrie[0])}}" method="post">
       <dt>status:
       <dd><select name=status>
@@ -21,6 +25,7 @@
         {%endfor%}
           </select>
       <dd><input type=submit value="modifier"><br>
+    </form>
     {%else%}
         status: {{ entrie[9] }}<br>
     {% endif%}
@@ -30,6 +35,11 @@
     <form action="{{url_for('messageprive',other=entrie[0])}}" method=post>
       <input type=submit value="envoyer un message privée">
     </form>
+  {%else%}
+  <form action="{{url_for('suppression')}}" method="post">
+    <input type=submit value="suppression du compte">
+  </form>
   {%endif%}
+{%endif%}
 
 {% endblock %}
