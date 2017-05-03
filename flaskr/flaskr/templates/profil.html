@@ -32,9 +32,11 @@
     rang: {{ entrie[10] }}<br>
 
   {% if entrie[0] != session.pseudo %}
+    {%if session.logged_in %}
     <form action="{{url_for('messageprive',other=entrie[0])}}" method=post>
       <input type=submit value="envoyer un message privée">
     </form>
+    {%endif%}
   {%else%}
   <form action="{{url_for('suppression')}}" method="post">
     <input type=submit value="suppression du compte">
