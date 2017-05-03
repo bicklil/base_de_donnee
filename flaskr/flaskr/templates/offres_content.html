@@ -8,6 +8,7 @@
   <h3>Auteur: {{donnee[6]}}, valable du {{donnee[1]}} au {{donnee[2]}}</h3><br>
   {{donnee[5]}}
   {%if session.logged_in %}
+  {% if session.pseudo != donnee[6] %}
     {%if date < donnee[2]|string %}
       {%if postule %}
       <form action="{{ url_for('postule',postule='True', numoffre=donnee[0])}}" method=post>
@@ -19,10 +20,24 @@
       </form>
       {%endif%}
     {%else%}
+        <br><br>
       <h3 class=fini>
       C'est fini !
       </h3>
     {%endif%}
+  {% else %}
+        <br><br>
+        <h3 class=info> Liste des postulateurs: </h3>
+        <ul>
+     {% for cdt in candidat %}
+       <li> <a href="{{url_for('profil',pseudo=cdt[1])}}">{{cdt[1]}}</a>
+     {%else%}
+        <h3 class=fini>
+        Pas de Candidat
+        </h3>
+     {%endfor%}
+     </ul>
+  {%endif%}
   {%endif%}
 </ul>
 {% endblock %}

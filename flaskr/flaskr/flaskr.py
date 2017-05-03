@@ -28,8 +28,8 @@ def validate_date(date_text):
 
 def connect_db():
     """Connects to the specific database."""
-    # rv = psycopg2.connect(host="sinfo1")
-    rv = psycopg2.connect(dbname="eforum", user="jc")
+    rv = psycopg2.connect(host="sinfo1")
+    # rv = psycopg2.connect(dbname="eforum", user="jc")
     # curseur = rv.cursor()
     # curseur.execute("SET search_path TO Eforum;")
     return rv
@@ -145,8 +145,12 @@ def offres_content(numoffre):
         postule = True
     else:
         postule = False
+    cur.execute("SELECT * from UtilisateurOffreRecrutement\
+                where IdAnnonce='"+str(numoffre)+"'")
+    get_candidat = cur.fetchall()
     return flask.render_template('offres_content.html', donnee=donnee,
-                                 postule=postule, date=date_now)
+                                 postule=postule, date=date_now,\
+                                 candidat=get_candidat)
 
 
 @app.route('/<section>')
