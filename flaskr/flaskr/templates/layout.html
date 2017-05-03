@@ -14,7 +14,7 @@
     <a href="{{ url_for('msgbox') }}">mes messages</a>
     {% if request.path == "/" %}
         <a href="{{ url_for('show_offres') }}">offres recrutement</a>
-        {% if session.status[0] == "Administrateur" %}
+        {% if session.status == "Administrateur" %}
           <a href="{{ url_for('stat') }}">stat </a>
         {%endif%}
     {% endif %}
