@@ -274,7 +274,7 @@ Sujet(\underline{IdSujet}, NomSujet, DateCreation, PopularitéSujet, \#NomCatego
 
 Catégorie(\underline{NomCategorie}, popularitéCatégorie, \#NomSection)\\
 
-Section(\underline{NomSection}, PopularitéSection, \#moderateur)\\
+Section(\underline{NomSection}, PopularitéSection, \#Moderateur)\\
 
 Rang(\underline{NomRang}, PalierAcces)\\
 
@@ -283,7 +283,7 @@ Support(\underline{Idsupport}, systemeExploitation, NavigateurWeb, \#Pseudo)\\
 Statistiques(\underline{Date}, \underline{TrancheHoraire}, NbConnections, NbMessagesPostés)\\
 
 
-Offrerecrutement(\underline{IdAnnonce}, DateAnnonce, DateButoire, TypeAnnonce, TypeContrat, MsgAnnonce, \#Pseudo, \#AdresseMail)\\
+Offrerecrutement(\underline{IdAnnonce}, DateAnnonce, DateButoire, TypeAnnonce, TypeContrat, MsgAnnonce, \#Pseudo)\\
 
 Msgprive(\underline{IdMP}, DateMP, ContenuMp, EtatMp, \#pseudo-envoi, \#pseudo-recoit)\\
 
@@ -292,6 +292,8 @@ Programmation(\underline{LangageProg})\\
 utilisateurProgrammation(\underline{\#pseudo},\underline{\#langageProg}, NiveauProg, DispoRct)\\
 
 offreRecrutementProgrammation(\underline{\#Idannonce},\underline{\#langageProg}, NiveauDemande)\\
+
+UtilisateurOffreRecrutement(\underline{\#IdAnnonce}, \underline{\#Pseudo})
 
 \chapter{Fonctionnalités proposé au niveau de la bdd}
 \section{Requetes}
@@ -373,4 +375,7 @@ Utilisateur lambda non inscrit:
   \item Un utilisateur lambda non inscrit ne peut accéder a aucune information sur les utilisateurs;\\
 \end{itemize}
 
+\chapter{Bilan du projet}
+Ce projet nous a permis d'apprendre à gérer une base de données et a l'implémenter dans un module internet, d'améliorer nos capacités de gestion du travail en groupe dans un temps limité.\par 
+Nous avons pu découvrir d'autres aspects de la programmation, notamment concernant l'aspect web et la gestion de données. 
 \end{document}
