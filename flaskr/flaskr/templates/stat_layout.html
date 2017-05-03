@@ -3,7 +3,7 @@
 
 {% block body %}
 <a href="/">accueil</a><br><br>
-{% if session.status[0] == "Administrateur" %}
+{% if session.status == "Administrateur" %}
  <script src="{{ url_for('static', filename='Chart.min.js') }}"></script>
 <form action="{{ url_for('stat') }}" method=post>
     <dl>

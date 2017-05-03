@@ -19,6 +19,17 @@ insert into Message values(DEFAULT,'2003-05-05 09:01:00','hihi',0,'kiki',1);
 insert into Message values(DEFAULT,'2003-05-05 10:01:00','hihi',0,'kiki',1);
 insert into Message values(DEFAULT,'2003-05-05 11:01:00','hihi',0,'kiki',1);
 insert into Message values(DEFAULT,'2003-05-05 11:01:00','hihi',0,'kiki',1);
-insert into OffreRecrutement values (DEFAULT, '2017-03-30', '2017-04-30', 'web', 'CDI', 'rct dj cm lvl 150 min passe vite', 'kou');
-insert into OffreRecrutement values (DEFAULT, '2017-03-15', '2017-03-30', 'web', 'CDD', 'rct de sexe f et m pour tue le karalamoure', 'kou');
+insert into OffreRecrutement values (DEFAULT, '2017-03-30', '2017-05-30', 'web', 'CDI', 'rct dj cm lvl 150 min passe vite', 'kou');
+insert into OffreRecrutement values (DEFAULT, '2017-03-15', '2017-05-30', 'web', 'CDD', 'rct de sexe f et m pour tue le karalamoure', 'kou');
 insert into UtilisateurOffreRecrutement values (1,'kiki'), (2,'kiki');
+insert into Statistiques values ('2017-05-05',8,100,100),
+  ('2017-05-03',15,500,50),
+  ('2017-05-03',12,300,200),
+  ('2017-05-02',8,150,800),
+  ('2017-05-01',8,200,100),
+  ('2017-05-05',3,100,100),
+  ('2017-05-05',10,0,50),
+  ('2017-05-05',13,20,100),
+  ('2017-05-05',18,10,1300),
+  ('2017-05-05',22,100,300),
+  ('2017-05-05',4,200,100);

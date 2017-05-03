@@ -270,6 +270,9 @@ def login():
                 flask.flash('You were logged in')
                 flask.session['pseudo'] = flask.request.form['username']
                 flask.session['status'] = answer[0][0]
+                date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                cur.execute("UPDATE utilisateur set DateDernierCo = '{}'\
+                            where pseudo = '{}'".format(date, pseudo))
                 return flask.redirect(flask.url_for('show_section'))
         except IndexError:
             error = 'Invalid username'
